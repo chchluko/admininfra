@@ -45,6 +45,14 @@ class TrackingEmailController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = [
+            'motivo' => 'required',
+        ];
+        $messages = [
+            'motivo.required' => 'El motivo de la actuzalición debe ser especificado',
+        ];
+        $this->validate($request, $rules, $messages);
+
         $secret = Email::findOrFail($request->id);
         $fire = Crypt::decrypt($secret->password);
 

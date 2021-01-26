@@ -31,7 +31,10 @@
                     <!-- input states -->
                     <div class="form-group">
                         <label>Motivo de la consulta </label>
-                        <textarea class="form-control" rows="3" name="motivo" placeholder="Especifique el motivo por el cual necesita la contraseña ..."></textarea>
+                        <textarea class="form-control {{ $errors->has('motivo') ? 'field-error' : '' }}" rows="3" name="motivo" placeholder="Especifiqu el motivo por el cual necesita la contraseña ...">{{ old('motivo') }}</textarea>
+                        @if ($errors->has('motivo'))
+                            <span class="error-message">{{ $errors->first('motivo') }}</span>
+                        @endif
                     </div>
                     <input type="hidden" name="id" value="{{ $email->id }}">
                     <input type="hidden" name="tipo" value="GetPassword">
