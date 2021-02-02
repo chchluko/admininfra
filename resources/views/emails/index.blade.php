@@ -30,18 +30,30 @@
                 <thead>
                     <th>Nomina</th>
                     <th>Correo</th>
+                    <th>Status</th>
+                    <th>Ultima modificacion</th>
                     <th>Accion</th>
                 </thead>
                 <tbody>
                         <tr>
                             <td>{{ $correo->nomina }}</td>
                             <td>{{ $correo->email }}</td>
+                            <td>@if ($correo->status == 1)
+                                    <span class="badge badge-success"> Activo </span>
+                                @else
+                                    <span class="badge badge-danger"> Baja </span>
+                                @endif
+                            <td>{{ \Carbon\Carbon::parse($correo->updated_at)->format('d/m/Y H:i') }}</td>
+                            </td>
                             <td>
                                 @can('view password')
                                  <a type="link" href="{{ route('emails.show', $correo->id) }}" class="btn btn-default"><i class="fas fa-eye"></i></a>
                                 @endcan
                                 @can('edit password')
-                                 <a type="link" href="{{ route('emails.edit', $correo->id) }}" class="btn btn-default"><i class="fas fa-edit"></i></a>
+                                    @if ($correo->status == 1)
+                                        <a type="link" href="{{ route('emails.edit', $correo->id) }}" class="btn btn-default"><i class="fas fa-edit"></i></a>
+                                        <a type="link" href="{{ route('emails.down', $correo->id) }}" class="btn btn-default"><i class="fas fa-trash-alt"></i></a>
+                                    @endif
                                 @endcan
                                 @role('direccion')
                                  <a type="link" href="{{ route('trackingreportemail',$correo->id) }}" class="btn btn-default"><i class="fas fa-user-secret"></i></a>

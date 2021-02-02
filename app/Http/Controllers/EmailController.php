@@ -51,20 +51,22 @@ class EmailController extends Controller
      */
     public function store(Request $request)
     {
-       // dd($request->all());
+        //dd($request->all());
         $rules = [
             'password' => 'required|confirmed',
             'nomina' => 'required',
             'email' => 'required|string|email|unique:emails',
+            'tipo' => 'in:1,2,3',
         ];
         $messages = [
-            'password.required' => 'Debe ingresar un nuevo password',
+            'password.required' => 'Debe ingresar un password',
             'password.confirmed' =>'La confirmación del password fallo',
             'nomina.required' => 'El número de Nomina debe ser especificado',
             'email.required' => 'Debe especificar un correo',
             'email.string' => 'Correo no valido',
             'email.email' => 'Correo no valido',
             'email.unique' => 'El correo ya existe, en la base de datos',
+            'tipo.in' => 'Debe seleccionar un tipo de cuenta de correo',
         ];
         $this->validate($request, $rules, $messages);
         $email = new Email();
@@ -153,7 +155,33 @@ class EmailController extends Controller
      */
     public function destroy(Email $email)
     {
-        //
+       //
+    }
+
+    public function down(Email $email){
+        return view('emails.destroy',compact('email'));
+    }
+
+    public function downupdate(Request $request, Email $email){
+        $rules = [
+            'motivo' => 'required',
+        ];
+        $messages = [
+            'motivo.required' => 'El motivo de la baja debe ser especificado',
+        ];
+        $this->validate($request, $rules, $messages);
+
+        $email->status = 0;
+        $email->update();
+        $registro = new TrackingEmail();
+        $registro->user_id = Auth::id();
+        $registro->email_id = $email->id;
+        $registro->accion = $request->tipo;
+        $registro->motivo = $request->motivo;
+        $registro->save();
+        return redirect()->route('emails.index')->with('info',"La cuenta de correo se dio de baja correctamente");
+
+       dd($request);
     }
 
     public function searchEmail(Request $request)

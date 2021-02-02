@@ -54,4 +54,24 @@ Route::get('searchtrackingemail', 'TrackingEmailController@searchTrackingEmail')
 Route::get('reporttrackingemailbyuser/{user}', 'TrackingEmailController@reportTrackingByUser')->name('trackingreport')->middleware('auth');
 Route::get('reporttrackingemail/{email}', 'TrackingEmailController@reportTrackingEmailByEmail')->name('trackingreportemail')->middleware('auth');
 
+Route::get('emails/{email}/destroy', 'EmailController@down')->name('emails.down');
+Route::put('emails/{email}/destroy', 'EmailController@downupdate')->name('emails.downupdate');
 
+
+
+
+Route::get('/sql', function() {
+    $serverName = "172.16.1.203";
+        $connectionOptions = array(
+            "Database" => "PROAEx",
+            "Uid" => "adminnom",
+            "PWD" => "MONNIMDA"
+        );
+        //Establishes the connection
+        $conn = sqlsrv_connect($serverName, $connectionOptions);
+        if($conn){
+            echo "Connected!";
+        }else{
+            echo "Failed";
+        }
+    });

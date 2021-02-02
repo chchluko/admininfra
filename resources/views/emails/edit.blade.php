@@ -36,7 +36,7 @@
             @method('PUT')
 
                 <input type="hidden" name="id" value="{{ $email->id }}">
-                <input type="hidden" name="tipo" value="UpdatePassaword">
+                <input type="hidden" name="tipo" value="UpdatePassword">
 
                 <div class="form-group row">
                     <label for="password" class="col-sm-2 col-form-label">Contraseña</label>
@@ -56,7 +56,7 @@
                   </div>
                   <div class="form-group">
                       <label>Motivo de la actualización </label>
-                      <textarea class="form-control {{ $errors->has('motivo') ? 'field-error' : '' }}" rows="3" name="motivo" placeholder="Especifiqu el motivo por el cual necesita la contraseña ...">{{ old('motivo') }}</textarea>
+                      <textarea class="form-control {{ $errors->has('motivo') ? 'field-error' : '' }}" rows="3" name="motivo" placeholder="Especifique el motivo por el cual necesita la contraseña ...">{{ old('motivo') }}</textarea>
                         @if ($errors->has('motivo'))
                             <span class="error-message">{{ $errors->first('motivo') }}</span>
                         @endif
@@ -66,10 +66,9 @@
     <div class="card-footer clearfix">
         <button type="submit" class="btn btn-info">Actualizar</button>
         <a type="link" href="{{ url()->previous() }}" class="btn btn-default float-right">Cancelar</a>
-    </div>
-</form>
-  </div>
 
+    </div>    </form>
+  </div>
 @stop
 
 @section('css')

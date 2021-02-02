@@ -25,7 +25,7 @@
                 <div class="form-group row">
                     <label for="email" class="col-sm-2 col-form-label">Correo Electronico</label>
                     <div class="col-sm-10">
-                      <input type="email" name="email" class="form-control {{ $errors->has('email') ? 'field-error' : '' }}" id="email" placeholder="email" value="{{ old('email') }}">
+                      <input type="email" name="email" class="form-control {{ $errors->has('email') ? 'field-error' : '' }}" id="email" placeholder="correo@dominio.com" value="{{ old('email') }}">
                       @if ($errors->has('email'))
                         <span class="error-message">{{ $errors->first('email') }}</span>
                       @endif
@@ -34,7 +34,7 @@
                 <div class="form-group row">
                     <label for="nomina" class="col-sm-2 col-form-label">Nomina</label>
                     <div class="col-sm-10">
-                      <input type="number" name="nomina" class="form-control {{ $errors->has('nomina') ? 'field-error' : '' }}" id="nomina" placeholder="Múmero de Nómina" value="{{ old('nomina') }}">
+                      <input type="number" name="nomina" class="form-control {{ $errors->has('nomina') ? 'field-error' : '' }}" id="nomina" placeholder="Número de Nómina" value="{{ old('nomina') }}">
                       @if ($errors->has('nomina'))
                         <span class="error-message">{{ $errors->first('nomina') }}</span>
                       @endif
@@ -43,7 +43,7 @@
                 <div class="form-group row">
                     <label for="password" class="col-sm-2 col-form-label">Contraseña</label>
                     <div class="col-sm-10">
-                      <input type="password" name="password" class="form-control {{ $errors->has('password') ? 'field-error' : '' }}" id="password" placeholder="Nuevo password">
+                      <input type="password" name="password" class="form-control {{ $errors->has('password') ? 'field-error' : '' }}" id="password" placeholder="Password">
                       @if ($errors->has('password'))
                         <span class="error-message">{{ $errors->first('password') }}</span>
                       @endif
@@ -59,6 +59,9 @@
                     {!! Form::Label('tipo', 'Tipo',['class' => 'col-sm-2 col-form-label']) !!}
                     <div class="col-md-10">
                         {!! Form::select('tipo', $tipo, 0, ['class' => 'form-control']) !!}
+                        @if ($errors->has('tipo'))
+                            <span class="error-message">{{ $errors->first('tipo') }}</span>
+                        @endif
                     </div>
                 </div>
     </div>
