@@ -12,13 +12,8 @@
     </div>
     <!-- /.card-header -->
 
-    @if ($errors->any())
-        <div class="errors alert alert-info alert-dismissible">
-            <h5><i class="icon fas fa-info"></i> Aviso!</h5>
-            Por favor corrige los siguientes errores.
-        </div>
-    @endif
     <div class="card-body">
+        @include('partials.alert')
         <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box">
               <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>

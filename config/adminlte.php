@@ -234,12 +234,21 @@ return [
         [
             'text' => 'Buscar...',
             'search' => false,
-            'topnav' => true,
+            'topnav' => false,
         ],
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
+            'text' => 'Personas',
+            'url'  => 'empleados',
+            'icon' => 'fas fa-fw fa-user',
+            'topnav' => true,
+            'can'  => 'tester',
+        ],
+        [
+            'text' => 'Ubicaciones',
+            'url'  => 'ubicaciones',
+            'icon' => 'fas fa-fw fa-map-marker-alt',
+            'topnav' => true,
+            'can'  => 'tester',
         ],
         [
             'text' => 'Correos',
@@ -252,7 +261,189 @@ return [
             'icon' => 'fas fa-fw fa-user-secret',
             'can'  => 'auditar',
         ],
-
+        [
+            'text' => 'Claves Telefonicas',
+            'icon' => 'fas fa-fw fa-phone',
+            'can'  => 'tester',
+            'submenu' => [
+                [
+                    'text' => 'Asignaciones',
+                    'url'  => 'asignacionclaves',
+                    'icon' => 'fas fa-fw fa-user-check',
+                ],
+                [
+                    'text' => 'Claves',
+                    'url'  => 'clavestelefonicas',
+                ],
+            ],
+        ],
+        [
+            'text'    => 'Enlaces & Lineas',
+            'icon'    => 'fas fa-fw fa-link',
+            'can'  => 'tester',
+            'submenu' => [
+                [
+                    'text' => 'Enlaces (Servicios)',
+                    'url'  => 'enlaces',
+                    'icon' => 'fas fa-fw fa-unlink',
+                ],
+                [
+                    'text' => 'Catalogos',
+                    'icon' => 'fas fa-fw fa-folder',
+                    'submenu' => [
+                        [
+                            'text' => 'Tipos',
+                            'url'  => 'enlacestipos',
+                        ],
+                        [
+                            'text' => 'Provedores',
+                            'url'  => 'enlacesprovedores',
+                        ],
+                        [
+                            'text' => 'Status',
+                            'url'  => 'enlacesstatus',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        [
+            'text' => 'Extensiones',
+            'icon' => 'fas fa-fw fa-code-branch',
+            'can'  => 'tester',
+            'submenu' => [
+                [
+                    'text' => 'Asignaciones',
+                    'url'  => 'extensiones',
+                    'icon' => 'fas fa-fw fa-user-check',
+                ],
+                [
+                    'text' => 'Tipos',
+                    'url'  => 'extensionestipo',
+                ],
+            ],
+        ],
+        [
+            'text' => 'Hardware Plataformas',
+            'icon' => 'fas fa-fw fa-server',
+            'can'  => 'tester',
+            'submenu' => [
+                [
+                    'text' => 'Plataformas',
+                    'url'  => 'plataformas',
+                    'icon' => 'fas fa-fw fa-server',
+                ],
+                [
+                    'text' => 'Catalogos',
+                    'icon' => 'fas fa-fw fa-folder',
+                    'submenu' => [
+                        [
+                            'text' => 'Tipos',
+                            'url'  => 'plataformastipo',
+                        ],
+                        [
+                            'text' => 'Marcas',
+                            'url'  => 'plataformasmarca',
+                        ],
+                        [
+                            'text' => 'Provedores',
+                            'url'  => 'plataformasprovedor',
+                        ],
+                        [
+                            'text' => 'Status',
+                            'url'  => 'plataformasstatus',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        [
+            'text' => 'Hardware Soporte',
+            'icon' => 'fas fa-fw fa-laptop',
+            'can'  => 'tester',
+            'submenu' => [
+                [
+                    'text' => 'Inventario',
+                    'url'  => 'soporte',
+                    'icon' => 'fas fa-fw fa-laptop',
+                ],
+                [
+                    'text' => 'Asignaciones',
+                    'url'  => 'asignacionsoporte',
+                    'icon' => 'fas fa-fw fa-user-check',
+                ],
+                [
+                    'text' => 'Catalogos',
+                    'icon' => 'fas fa-fw fa-folder',
+                    'submenu' => [
+                        [
+                            'text' => 'Tipos',
+                            'url'  => 'soportetipo',
+                        ],
+                        [
+                            'text' => 'Marcas',
+                            'url'  => 'soportemarca',
+                        ],
+                        [
+                            'text' => 'Provedores',
+                            'url'  => 'soporteprovedor',
+                        ],
+                        [
+                            'text' => 'Status',
+                            'url'  => 'soportestatus',
+                        ],
+                        [
+                            'text' => 'Owner',
+                            'url'  => 'soporteowner',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        [
+            'text' => 'Equipos Moviles',
+            'icon' => 'fas fa-fw fa-mobile-alt',
+            'can'  => 'tester',
+            'submenu' => [
+                [
+                    'text' => 'Planes',
+                    'url'  => 'movilplan',
+                    'icon' => 'fas fa-fw fa-wifi',
+                ],
+                [
+                    'text' => 'Equipos',
+                    'url'  => 'movil',
+                    'icon' => 'fas fa-fw fa-mobile-alt',
+                ],
+                [
+                    'text' => 'Asignaciones',
+                    'url'  => 'asignacionmovil',
+                    'icon' => 'fas fa-fw fa-user-check',
+                ],
+                [
+                    'text' => 'Catalogos',
+                    'icon' => 'fas fa-fw fa-folder',
+                    'submenu' => [
+                        [
+                            'text' => 'Tipos',
+                            'url'  => 'moviltipo',
+                        ],
+                        [
+                            'text' => 'Marcas',
+                            'url'  => 'movilmarca',
+                        ],
+                        [
+                            'text' => 'Status',
+                            'url'  => 'movilstatus',
+                        ],
+                        [
+                            'text' => 'Tipos de Planes',
+                            'url'  => 'plantipo',
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ],
 
     /*
@@ -311,7 +502,7 @@ return [
             ],
         ],
         'Select2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

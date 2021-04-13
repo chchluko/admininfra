@@ -32,7 +32,7 @@
                            value="{{ old('username') }}" placeholder="{{ __('adminlte::adminlte.username') }}" autofocus>
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                            <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
                         </div>
                     </div>
                     @if($errors->has('username'))

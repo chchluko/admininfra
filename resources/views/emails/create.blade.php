@@ -12,13 +12,9 @@
     </div>
     <!-- /.card-header -->
 
-    @if ($errors->any())
-        <div class="errors alert alert-info alert-dismissible">
-            <h5><i class="icon fas fa-info"></i> Aviso!</h5>
-            Por favor corrige los siguientes errores.
-        </div>
-    @endif
+
     <div class="card-body">
+        @include('partials.alert')
           <form action="{{ route('emails.store') }}" method="POST">
             @csrf
                 <input type="hidden" name="accion" value="LoadEmail">

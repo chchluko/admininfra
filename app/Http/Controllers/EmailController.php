@@ -82,7 +82,7 @@ class EmailController extends Controller
         $registro->accion = $request->accion;
         $registro->motivo = 'Alta en el sistema';
         $registro->save();
-        return redirect()->route('emails.index')->with('info',"El registro se guardo correctamente.");
+        return redirect()->route('emails.index')->with('success',"El registro se guardo correctamente.");
     }
 
     /**
@@ -144,7 +144,7 @@ class EmailController extends Controller
         $registro->accion = $request->tipo;
         $registro->motivo = $request->motivo;
         $registro->save();
-        return redirect()->route('emails.index')->with('info',"La contraseña se cambio correctamente");
+        return redirect()->route('emails.index')->with('success',"La contraseña se cambio correctamente");
     }
 
     /**
@@ -179,7 +179,7 @@ class EmailController extends Controller
         $registro->accion = $request->tipo;
         $registro->motivo = $request->motivo;
         $registro->save();
-        return redirect()->route('emails.index')->with('info',"La cuenta de correo se dio de baja correctamente");
+        return redirect()->route('emails.index')->with('success',"La cuenta de correo se dio de baja correctamente");
 
        dd($request);
     }
@@ -199,6 +199,6 @@ class EmailController extends Controller
         if ($resultado->count() > 0) {
            return view('emails.index',compact('resultado'));
         }
-        return redirect()->route('emails.index')->with('success',"No hay resultados que coincidan");
+        return redirect()->route('emails.index')->with('info',"No hay resultados que coincidan");
     }
 }
