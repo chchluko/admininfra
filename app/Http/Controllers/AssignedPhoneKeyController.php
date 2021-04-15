@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class AssignedPhoneKeyController extends Controller
 {
+
+    public $filtros;
+
+    public function __construct()
+    {
+        $this->filtros = ['0'=>'Seleccione un tipo','nomina'=>'Número de Nómina','clave'=>'Clave Teléfonica'];
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +24,9 @@ class AssignedPhoneKeyController extends Controller
      */
     public function index()
     {
-        $resultado = AssignedPhoneKey::paginate(15);
-        return view('clavestelefonicas.asignacion.index', compact('resultado'));
+        $filtros = $this->filtros;
+        $resultado = AssignedPhoneKey::where('comentario', '')->paginate(15);
+        return view('clavestelefonicas.asignacion.index', compact('resultado','filtros'));
     }
 
     /**
@@ -118,4 +127,31 @@ class AssignedPhoneKeyController extends Controller
     {
         //
     }
+
+
+    public function searchAssignedKey(Request $request)
+    {
+        $rules = [
+            'nombre' => 'required|string',
+            'tipo' => 'notin:0'
+        ];
+        $messages = [
+            'nombre.required' => 'Debe introducir un texto',
+            'nombre.string' => 'Cadena no valida',
+            'tipo.notin' => 'Debe elegir un tipo de campo a buscar',
+        ];
+        $this->validate($request, $rules, $messages);
+
+        $filtros = $this->filtros;
+
+        $resultado = AssignedPhoneKey::buscarpor($request->tipo, $request->nombre)->paginate(15);
+
+        if ($resultado->count() > 0) {
+            return view('clavestelefonicas.asignacion.index', compact('resultado'),compact('filtros'));
+        }
+        return redirect()->route('asignacionclaves.index')->with('info', "No hay resultados que coincidan")->withInput();
+    }
+
+
+
 }

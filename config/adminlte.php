@@ -242,6 +242,7 @@ return [
             'icon' => 'fas fa-fw fa-user',
             'topnav' => true,
             'can'  => 'tester',
+            //'roles' => ['Tester',],
         ],
         [
             'text' => 'Ubicaciones',
@@ -466,6 +467,7 @@ return [
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\DataFilter::class,
+      //  JeroenNoten\LaravelAdminLte\Menu\Filters\RoleMenuFilter::class,
     ],
 
     /*

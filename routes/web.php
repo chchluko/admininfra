@@ -64,6 +64,7 @@ Route::resource('ubicaciones', UbicacionController::class)->middleware('auth');
 
 Route::resource('clavestelefonicas', PhoneKeyController::class)->middleware('auth');
 Route::resource('asignacionclaves', AssignedPhoneKeyController::class)->middleware('auth');
+Route::get('searchclaveasig', 'AssignedPhoneKeyController@searchAssignedKey')->name('buscarclaveasignada')->middleware('auth');
 
 Route::resource('enlacesprovedores', LinkProviderController::class)->middleware('auth');
 Route::resource('enlacestipos', LinkTypeController::class)->middleware('auth');
@@ -100,5 +101,6 @@ Route::resource('movil', MovilController::class)->middleware('auth');
 Route::resource('asignacionmovil', AssignedMovilController::class)->middleware('auth');
 Route::resource('plantipo', PlanTypeController::class)->middleware('auth');
 Route::get('searchmovilasig', 'AssignedMovilController@searchAssignedMovil')->name('buscarmovilasig')->middleware('auth');
+Route::get('searchmovil', 'MovilController@searchMovil')->name('buscarmovil')->middleware('auth');
 Route::get('resposivamovil/{asignacionmovil}', 'AssignedMovilController@responsiva')->name('responsiva_movil')->middleware('auth');
 

@@ -147,7 +147,7 @@ class AssignedMovilController extends Controller
         if ($resultado->count() > 0) {
             return view('movil.asignacion.index', compact('resultado'),compact('filtros'));
         }
-        return redirect()->route('asignacionmovil.index')->with('info', "No hay resultados que coincidan")->withInput();;
+        return redirect()->route('asignacionmovil.index')->with('info', "No hay resultados que coincidan")->withInput();
     }
 
     public function responsiva(AssignedMovil $asignacionmovil){

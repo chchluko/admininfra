@@ -30,6 +30,7 @@
                 <thead>
                     <th>Nomina</th>
                     <th>Correo</th>
+                    <th>Nivel</th>
                     <th>Status</th>
                     <th>Ultima modificacion</th>
                     <th>Accion</th>
@@ -38,6 +39,7 @@
                         <tr>
                             <td>{{ $correo->nomina }}</td>
                             <td>{{ $correo->email }}</td>
+                            <td>{{ $correo->tipo->tipo }}</td>
                             <td>@if ($correo->status == 1)
                                     <span class="badge badge-success"> Activo </span>
                                 @else
