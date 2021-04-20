@@ -15,7 +15,9 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
+            @include('partials.form.search',['target' => 'buscarplan','filtro'=> $filtros ])
             @include('partials.flash')
+            @if ($resultado->count() > 0)
             <table class="table">
                 <thead>
                     <th>Plan</th>
@@ -44,6 +46,7 @@
                     @endforeach
                 </tbody>
             </table>
+            @endif
         </div>
         <!-- /.card-body -->
         <div class="card-footer clearfix">

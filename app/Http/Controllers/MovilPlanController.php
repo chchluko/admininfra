@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class MovilPlanController extends Controller
 {
+    public $filtros;
+
+    public function __construct()
+    {
+        $this->filtros = ['0' => 'Seleccione un tipo', 'lineatelefonica' => 'Linea Teléfonica'];
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +23,9 @@ class MovilPlanController extends Controller
      */
     public function index()
     {
-        $resultado = MovilPlan::paginate(15);
-        return view('movil.plan.index',compact('resultado'));
+        $filtros = $this->filtros;
+        $resultado = MovilPlan::where('comentario','')->paginate(15);
+        return view('movil.plan.index',compact('resultado','filtros'));
     }
 
     /**
@@ -86,5 +95,28 @@ class MovilPlanController extends Controller
     public function destroy(MovilPlan $movilPlan)
     {
         //
+    }
+
+    public function searchPlan(Request $request)
+    {
+        $rules = [
+            'nombre' => 'required|string',
+            'tipo' => 'notin:0'
+        ];
+        $messages = [
+            'nombre.required' => 'Debe introducir un texto',
+            'nombre.string' => 'Cadena no valida',
+            'tipo.notin' => 'Debe elegir un tipo de campo a buscar',
+        ];
+        $this->validate($request, $rules, $messages);
+
+        $filtros = $this->filtros;
+
+        $resultado = MovilPlan::buscarpor($request->tipo, $request->nombre)->paginate(15);
+
+        if ($resultado->count() > 0) {
+            return view('movil.plan.index', compact('resultado','filtros'));
+        }
+        return redirect()->route('movilplan.index')->with('info', "No hay resultados que coincidan")->withInput();
     }
 }

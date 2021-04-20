@@ -74,6 +74,7 @@ Route::get('searchenlace', 'LinkController@searchLink')->name('buscarlink')->mid
 
 Route::resource('extensionestipo', ExtensionTypeController::class)->middleware('auth');
 Route::resource('extensiones', ExtensionController::class)->middleware('auth');
+Route::get('searchextension', 'ExtensionController@searchExtension')->name('buscarextension')->middleware('auth');
 
 Route::resource('plataformastipo', PlatformTypeController::class)->middleware('auth');
 Route::resource('plataformasstatus', PlatformStatusController::class)->middleware('auth');
@@ -102,5 +103,6 @@ Route::resource('asignacionmovil', AssignedMovilController::class)->middleware('
 Route::resource('plantipo', PlanTypeController::class)->middleware('auth');
 Route::get('searchmovilasig', 'AssignedMovilController@searchAssignedMovil')->name('buscarmovilasig')->middleware('auth');
 Route::get('searchmovil', 'MovilController@searchMovil')->name('buscarmovil')->middleware('auth');
+Route::get('searchplan', 'MovilPlanController@searchPlan')->name('buscarplan')->middleware('auth');
 Route::get('resposivamovil/{asignacionmovil}', 'AssignedMovilController@responsiva')->name('responsiva_movil')->middleware('auth');
 

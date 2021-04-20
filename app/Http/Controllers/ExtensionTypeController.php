@@ -36,6 +36,15 @@ class ExtensionTypeController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = [
+            'tipo' => 'required|string',
+        ];
+        $messages = [
+            'tipo.required' => 'Debe introducir un texto',
+            'tipo.string' => 'Cadena no valida',
+        ];
+        $this->validate($request, $rules, $messages);
+
         $tipo = new ExtensionType($request->all());
         $tipo->save();
 

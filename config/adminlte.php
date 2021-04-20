@@ -241,20 +241,22 @@ return [
             'url'  => 'empleados',
             'icon' => 'fas fa-fw fa-user',
             'topnav' => true,
-            'can'  => 'tester',
-            //'roles' => ['Tester',],
+            //'can'  => 'tester',
+            'roles' => ['tester',],
         ],
         [
             'text' => 'Ubicaciones',
             'url'  => 'ubicaciones',
             'icon' => 'fas fa-fw fa-map-marker-alt',
             'topnav' => true,
-            'can'  => 'tester',
+            //'can'  => 'tester',
+            'roles' => ['tester',],
         ],
         [
             'text' => 'Correos',
             'url'  => 'emails',
             'icon' => 'fas fa-fw fa-at',
+            'roles' => ['gerencia','direccion','operacion'],
         ],
         [
             'text' => 'Tracking emails',
@@ -265,7 +267,8 @@ return [
         [
             'text' => 'Claves Telefonicas',
             'icon' => 'fas fa-fw fa-phone',
-            'can'  => 'tester',
+            //'can'  => 'tester',
+            'roles' => ['telecom',],
             'submenu' => [
                 [
                     'text' => 'Asignaciones',
@@ -281,7 +284,8 @@ return [
         [
             'text'    => 'Enlaces & Lineas',
             'icon'    => 'fas fa-fw fa-link',
-            'can'  => 'tester',
+            //'can'  => 'tester',
+            'roles' => ['telecom',],
             'submenu' => [
                 [
                     'text' => 'Enlaces (Servicios)',
@@ -311,7 +315,8 @@ return [
         [
             'text' => 'Extensiones',
             'icon' => 'fas fa-fw fa-code-branch',
-            'can'  => 'tester',
+            //'can'  => 'tester',
+            'roles' => ['telecom',],
             'submenu' => [
                 [
                     'text' => 'Asignaciones',
@@ -327,7 +332,8 @@ return [
         [
             'text' => 'Hardware Plataformas',
             'icon' => 'fas fa-fw fa-server',
-            'can'  => 'tester',
+            //'can'  => 'tester',
+            'roles' => ['datacenter',],
             'submenu' => [
                 [
                     'text' => 'Plataformas',
@@ -361,7 +367,8 @@ return [
         [
             'text' => 'Hardware Soporte',
             'icon' => 'fas fa-fw fa-laptop',
-            'can'  => 'tester',
+            //'can'  => 'tester',
+            'roles' => ['soporte',],
             'submenu' => [
                 [
                     'text' => 'Inventario',
@@ -404,7 +411,8 @@ return [
         [
             'text' => 'Equipos Moviles',
             'icon' => 'fas fa-fw fa-mobile-alt',
-            'can'  => 'tester',
+            //'can'  => 'tester',
+            'roles' => ['movil',],
             'submenu' => [
                 [
                     'text' => 'Planes',
@@ -467,7 +475,7 @@ return [
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\DataFilter::class,
-      //  JeroenNoten\LaravelAdminLte\Menu\Filters\RoleMenuFilter::class,
+        JeroenNoten\LaravelAdminLte\Menu\Filters\RoleMenuFilter::class,
     ],
 
     /*

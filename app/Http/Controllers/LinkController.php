@@ -11,6 +11,13 @@ use Illuminate\Http\Request;
 
 class LinkController extends Controller
 {
+
+    public $filtros;
+
+    public function __construct()
+    {
+        $this->filtros = ['0' => 'Seleccione un tipo', 'referencia' => 'Referencia', 'anchodebanda' => 'Ancho de Banda'];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,8 +25,9 @@ class LinkController extends Controller
      */
     public function index()
     {
-        $resultado = Link::where('referencia','')->paginate(15);
-        return view('links.index',compact('resultado'));
+        $filtros = $this->filtros;
+        $resultado = Link::where('referencia', '')->paginate(15);
+        return view('links.index', compact('resultado', 'filtros'));
     }
 
     /**
@@ -29,11 +37,11 @@ class LinkController extends Controller
      */
     public function create()
     {
-        $tipos = LinkType::get()->pluck('tipo','id')->prepend('Seleccione',0);
-        $provedores = LinkProvider::get()->pluck('provedor','id')->prepend('Seleccione',0);
-        $status = LinkStatus::get()->pluck('status','id')->prepend('Seleccione',0);
-        $ubicaciones = Ubicacion::orderBy('NOMBRE_AREA')->pluck('NOMBRE_AREA','IDAREA')->prepend('Seleccione',0);
-        return view('links.create',compact('tipos','provedores','status','ubicaciones'));
+        $tipos = LinkType::get()->pluck('tipo', 'id')->prepend('Seleccione', 0);
+        $provedores = LinkProvider::get()->pluck('provedor', 'id')->prepend('Seleccione', 0);
+        $status = LinkStatus::get()->pluck('status', 'id')->prepend('Seleccione', 0);
+        $ubicaciones = Ubicacion::orderBy('NOMBRE_AREA')->pluck('NOMBRE_AREA', 'IDAREA')->prepend('Seleccione', 0);
+        return view('links.create', compact('tipos', 'provedores', 'status', 'ubicaciones'));
     }
 
     /**
@@ -44,6 +52,33 @@ class LinkController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = [
+            'provider_id' => 'notin:0',
+            'status_id' => 'notin:0',
+            'type_id' => 'notin:0',
+            'referencia' => 'required',
+            'anchodebanda' => 'required|integer',
+            'plazo' => 'required|integer',
+            'costo' => 'required|numeric|regex:/^[\d]{0,11}(\.[\d]{1,2})?$/',
+            'fcontratacion' => 'required|string',
+            'ubicacion_id' => 'notin:0',
+        ];
+        $messages = [
+            'referencia.required' => 'Debe introducir una referencia',
+            'anchodebanda.required' => 'Debe introducir un Ancho de banda',
+            'plazo.required' => 'Debe introducir un plazo en meses',
+            'costo.required' => 'Debe introducir un costo Mensual',
+            'anchodebanda.integer' => 'Debe ser un valor Numerico',
+            'plazo.integer' => 'Debe ser un valor Numerico',
+            'costo.integer' => 'Debe ser un valor Numerico',
+            'fcontratacion.required' => 'La fecha de contratación es requerida',
+            'type_id.notin' => 'Debe elegir un tipo',
+            'status_id.notin' => 'Debe elegir un status',
+            'ubicacion_id.notin' => 'Debe elegir una ubicación',
+            'provider_id.notin' => 'Debe elegir un provedor',
+        ];
+        $this->validate($request, $rules, $messages);
+
         $enlace = new Link($request->all());
         $enlace->save();
         return redirect('enlaces')->with('success', "Registro guardado correctammente");
@@ -57,7 +92,7 @@ class LinkController extends Controller
      */
     public function show(Link $enlace)
     {
-        return view('links.show',compact('enlace'));
+        return view('links.show', compact('enlace'));
     }
 
     /**
@@ -68,11 +103,11 @@ class LinkController extends Controller
      */
     public function edit(Link $enlace)
     {
-        $tipos = LinkType::get()->pluck('tipo','id')->prepend('Seleccione',0);
-        $provedores = LinkProvider::get()->pluck('provedor','id')->prepend('Seleccione',0);
-        $status = LinkStatus::get()->pluck('status','id')->prepend('Seleccione',0);
-        $ubicaciones = Ubicacion::orderBy('NOMBRE_AREA')->pluck('NOMBRE_AREA','IDAREA')->prepend('Seleccione',0);
-        return view('links.edit',compact('tipos','provedores','status','ubicaciones','enlace'));
+        $tipos = LinkType::get()->pluck('tipo', 'id')->prepend('Seleccione', 0);
+        $provedores = LinkProvider::get()->pluck('provedor', 'id')->prepend('Seleccione', 0);
+        $status = LinkStatus::get()->pluck('status', 'id')->prepend('Seleccione', 0);
+        $ubicaciones = Ubicacion::orderBy('NOMBRE_AREA')->pluck('NOMBRE_AREA', 'IDAREA')->prepend('Seleccione', 0);
+        return view('links.edit', compact('tipos', 'provedores', 'status', 'ubicaciones', 'enlace'));
     }
 
     /**
@@ -84,6 +119,33 @@ class LinkController extends Controller
      */
     public function update(Request $request, Link $enlace)
     {
+        $rules = [
+            'provider_id' => 'notin:0',
+            'status_id' => 'notin:0',
+            'type_id' => 'notin:0',
+            'referencia' => 'required',
+            'anchodebanda' => 'required|integer',
+            'plazo' => 'required|integer',
+            'costo' => 'required|numeric|regex:/^[\d]{0,11}(\.[\d]{1,2})?$/',
+            'fcontratacion' => 'required|string',
+            'ubicacion_id' => 'notin:0',
+        ];
+        $messages = [
+            'referencia.required' => 'Debe introducir una referencia',
+            'anchodebanda.required' => 'Debe introducir un Ancho de banda',
+            'plazo.required' => 'Debe introducir un plazo en meses',
+            'costo.required' => 'Debe introducir un costo Mensual',
+            'anchodebanda.integer' => 'Debe ser un valor Numerico',
+            'plazo.integer' => 'Debe ser un valor Numerico',
+            'costo.integer' => 'Debe ser un valor Numerico',
+            'fcontratacion.required' => 'La fecha de contratación es requerida',
+            'type_id.notin' => 'Debe elegir un tipo',
+            'status_id.notin' => 'Debe elegir un status',
+            'ubicacion_id.notin' => 'Debe elegir una ubicación',
+            'provider_id.notin' => 'Debe elegir un provedor',
+        ];
+        $this->validate($request, $rules, $messages);
+
         $enlace->update($request->all());
         return redirect('enlaces')->with('success', "Registro Actualizado correctammente");
     }
@@ -113,11 +175,13 @@ class LinkController extends Controller
         ];
         $this->validate($request, $rules, $messages);
 
+        $filtros = $this->filtros;
+
         $resultado = Link::buscarpor($request->tipo, $request->nombre)->paginate(15);
 
         if ($resultado->count() > 0) {
-            return view('links.index', compact('resultado'));
+            return view('links.index', compact('resultado', 'filtros'));
         }
-        return redirect()->route('enlaces.index')->with('info', "No hay resultados que coincidan");
+        return redirect()->route('enlaces.index')->with('info', "No hay resultados que coincidan")->withInput();
     }
 }

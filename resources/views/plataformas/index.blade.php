@@ -17,6 +17,7 @@
         <div class="card-body">
             @include('partials.form.search',['target' => 'buscarplataforma','filtro'=>$filtros ])
             @include('partials.flash')
+            @if ($resultado->count() > 0)
             <table class="table">
                 <thead>
                     <th>Provedor</th>
@@ -54,6 +55,7 @@
 
             @endforeach                </tbody>
             </table>
+            @endif
         </div>
         <!-- /.card-body -->
         <div class="card-footer clearfix">

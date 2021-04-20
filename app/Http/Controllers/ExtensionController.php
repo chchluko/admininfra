@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 class ExtensionController extends Controller
 {
+
+    public $filtros;
+
+    public function __construct()
+    {
+        $this->filtros = ['0'=>'Seleccione un tipo','nomina'=>'Número de Nómina','extension'=>'Extensión','modelo'=>'Modelo del Equipo','nombre'=>'Nombre'];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,8 +24,9 @@ class ExtensionController extends Controller
      */
     public function index()
     {
-        $resultado = Extension::paginate(15);
-        return view('extensiones.index',compact('resultado'));
+        $filtros = $this->filtros;
+        $resultado = Extension::where('comentario', '')->paginate(15);
+        return view('extensiones.index',compact('resultado','filtros'));
     }
 
     /**
@@ -42,6 +50,25 @@ class ExtensionController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = [
+            'modelo' => 'required|string',
+            'extension' => 'required|integer',
+            'type_id' => 'notin:0',
+            'nomina' => 'notin:0',
+            'ubicacion_id' => 'notin:0',
+        ];
+        $messages = [
+            'modelo.required' => 'Debe introducir un texto',
+            'modelo.string' => 'Cadena no valida',
+            'extension.required' => 'Debe introducir una extensión',
+            'extension.integer' => 'Debe ser un valor numerico',
+            'type_id.notin' => 'Debe elegir un tipo',
+            'nomina.notin' => 'Debe elegir un empleado',
+            'ubicacion_id.notin' => 'Debe elegir una ubicación',
+        ];
+        $this->validate($request, $rules, $messages);
+
+
         $asignacion = new Extension($request->all());
 
         $empleado = Empleado::find($request->nomina);
@@ -52,7 +79,7 @@ class ExtensionController extends Controller
         $asignacion->puesto = $empleado->NOMBRE_PUESTO;
         $asignacion->save();
 
-        return redirect('extensiones');
+        return redirect('extensiones')->with('success', "Registro guardado correctamente");
     }
 
     /**
@@ -98,5 +125,29 @@ class ExtensionController extends Controller
     public function destroy(Extension $extension)
     {
         //
+    }
+
+
+    public function searchExtension(Request $request)
+    {
+        $rules = [
+            'nombre' => 'required|string',
+            'tipo' => 'notin:0'
+        ];
+        $messages = [
+            'nombre.required' => 'Debe introducir un texto',
+            'nombre.string' => 'Cadena no valida',
+            'tipo.notin' => 'Debe elegir un tipo de campo a buscar',
+        ];
+        $this->validate($request, $rules, $messages);
+
+        $filtros = $this->filtros;
+
+        $resultado = Extension::buscarpor($request->tipo, $request->nombre)->paginate(15);
+
+        if ($resultado->count() > 0) {
+            return view('extensiones.index', compact('resultado'),compact('filtros'));
+        }
+        return redirect()->route('extensiones.index')->with('info', "No hay resultados que coincidan")->withInput();
     }
 }

@@ -3,20 +3,20 @@
 @section('title', 'Eextensiones')
 
 @section('content_header')
-<h1>Eextensiones</h1>
+<h1>Extensiones</h1>
 @stop
 @section('content')
 <div class="card card-primary">
     <div class="card-header">
       <h3 class="card-title">Asignar una Extension</h3>
       <div class="card-tools">
-        <a type="link" href="/enlaces" class="btn btn-tool"><i class="fas fa-list"></i></a>
+        <a type="link" href="/extensiones" class="btn btn-tool"><i class="fas fa-list"></i></a>
     </div>
     </div>
     <!-- /.card-header -->
 
-@include('partials.alert')
-    <div class="card-body">
+
+    <div class="card-body">@include('partials.alert')
           <form action="{{ route('extensiones.store') }}" method="POST">
             @csrf
             <div class="form-group row">
@@ -53,13 +53,14 @@
                       @endif
                   </div>
                 <div class="col-4">
-                    {!! Form::Label('extension_type_id', 'Tipo') !!}
-                        {!! Form::select('extension_type_id', $tipos, 0, ['class' => 'form-control']) !!}
-                        @if ($errors->has('extension_type_id'))
-                            <span class="error-message">{{ $errors->first('extension_type_id') }}</span>
+                    {!! Form::Label('type_id', 'Tipo') !!}
+                        {!! Form::select('type_id', $tipos, 0, ['class' => 'form-control']) !!}
+                        @if ($errors->has('type_id'))
+                            <span class="error-message">{{ $errors->first('type_id') }}</span>
                         @endif
                 </div>
             </div>
+            <div class="form-group row">@include('partials.form.comentario')</div>
     </div>
     <!-- /.card-body -->
     <div class="card-footer clearfix">

@@ -14,8 +14,8 @@
             </div>
         </div>
         <!-- /.card-header -->
-        <div class="card-body">
-            @include('partials.flash')
+        <div class="card-body">@include('partials.flash')
+
             <table class="table">
                 <thead>
                     <th>Tipo</th>

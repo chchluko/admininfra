@@ -14,7 +14,7 @@ class EmailController extends Controller
 {
     public function __construct()
     {
-     $this->middleware('role:soporte|direccion|datacenter')->only('index');
+     $this->middleware('role:operacion|direccion|gerencia')->only('index');
      $this->middleware('permission:create email')->only('create');
      $this->middleware('permission:view password')->only('view');
      $this->middleware('permission:edit password')->only('edit');

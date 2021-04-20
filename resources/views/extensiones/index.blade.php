@@ -15,7 +15,9 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
+            @include('partials.form.search',['target' => 'buscarextension','filtro'=>$filtros ])
             @include('partials.flash')
+            @if ($resultado->count() > 0)
             <table class="table">
                 <thead>
                     <th>Tipo</th>
@@ -31,7 +33,7 @@
             @foreach ($resultado as $extension)
                         <tr>
                             <td>{{ $extension->tipo->tipo }}</td>
-                            <td>@if ($extension->status == 1)
+                            <td>@if ($extension->activo == 1)
                                 <span class="badge badge-success"> Activa </span>
                             @else
                                 <span class="badge badge-info"> Inactiva </span>
@@ -48,9 +50,10 @@
                             <td>{{ \Carbon\Carbon::parse($extension->updated_at)->format('d/m/Y') }}</td>
                             <td></td>
                         </tr>
-
-            @endforeach                </tbody>
+            @endforeach
+                </tbody>
             </table>
+        @endif
         </div>
         <!-- /.card-body -->
         <div class="card-footer clearfix">

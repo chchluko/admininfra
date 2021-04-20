@@ -16,9 +16,9 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            @include('partials.form.search',['target' => 'buscarlink','filtro'=>
-        ['0'=>'Seleccione un tipo','referencia'=>'Referencia','anchodebanda'=>'Ancho de Banda']])
+            @include('partials.form.search',['target' => 'buscarlink','filtro'=> $filtros ])
             @include('partials.flash')
+            @if ($resultado->count() > 0)
             <table class="table">
                 <thead>
                     <th>Provedor</th>
@@ -53,9 +53,8 @@
                                     </tr>
                         @endforeach
                 </tbody>
-
-
             </table>
+            @endif
         </div>
         <!-- /.card-body -->
         <div class="card-footer clearfix">

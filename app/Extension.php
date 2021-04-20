@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Extension extends Model
 {
-    protected $fillable = ['extension','extension_type_id','modelo','ubicacion_id','nomina'];
+    protected $fillable = ['extension','type_id','modelo','ubicacion_id','nomina','comentario'];
 
     public function ubicacion()
     {
@@ -15,6 +15,14 @@ class Extension extends Model
 
     public function tipo()
     {
-        return $this->hasOne('App\ExtensionType','id','extension_type_id');
+        return $this->hasOne('App\ExtensionType','id','type_id');
+    }
+
+    public function scopeBuscarpor($query, $tipo, $nombre)
+    {
+        if (($tipo) && ($nombre)) {
+            $query->Where($tipo, "like", "%$nombre%");
+        }
+        return $query;
     }
 }

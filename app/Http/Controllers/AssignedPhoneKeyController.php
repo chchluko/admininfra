@@ -80,7 +80,7 @@ class AssignedPhoneKeyController extends Controller
         $clave->asignado = 1;
         $clave->save();
 
-        return redirect('asignacionclaves');
+        return redirect('asignacionclaves')->with('info', "Asignación guardada correctamente");
     }
 
     /**

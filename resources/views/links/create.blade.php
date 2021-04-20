@@ -15,8 +15,8 @@
     </div>
     <!-- /.card-header -->
 
-@include('partials.alert')
-    <div class="card-body">
+
+    <div class="card-body">@include('partials.alert')
           <form action="{{ route('enlaces.store') }}" method="POST">
             @csrf
                 @include('partials.form.ubicacion')

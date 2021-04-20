@@ -28,7 +28,7 @@ class PlatformController extends Controller
     public function index()
     {
         $filtros = $this->filtros;
-        $resultado = Platform::paginate(15);
+        $resultado = Platform::where('comentario', '')->paginate(15);
         return view('plataformas.index', compact('resultado','filtros'));
     }
 
