@@ -85,7 +85,7 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
+    'layout_fixed_sidebar' => true,
     'layout_fixed_navbar' => null,
     'layout_fixed_footer' => null,
 
@@ -239,10 +239,28 @@ return [
         [
             'text' => 'Personas',
             'url'  => 'empleados',
+            'icon' => 'fas fa-fw fa-user-friends',
+            'topnav' => true,
+            //'can'  => 'tester',
+            'roles' => ['tester',],
+        ],
+        [
+            'text' => 'Usuarios',
+            'url'  => 'users',
             'icon' => 'fas fa-fw fa-user',
             'topnav' => true,
             //'can'  => 'tester',
             'roles' => ['tester',],
+            'active' => ['users*'],
+        ],
+        [
+            'text' => 'Roles',
+            'url'  => 'roles',
+            'icon' => 'fas fa-fw fa-user-tag',
+            'topnav' => true,
+            //'can'  => 'tester',
+            'roles' => ['tester',],
+            'active' => ['roles*'],
         ],
         [
             'text' => 'Ubicaciones',
@@ -274,10 +292,13 @@ return [
                     'text' => 'Asignaciones',
                     'url'  => 'asignacionclaves',
                     'icon' => 'fas fa-fw fa-user-check',
+                    'active' => ['asignacionclaves*'],
                 ],
                 [
                     'text' => 'Claves',
                     'url'  => 'clavestelefonicas',
+                    'active' => ['roles*'],
+                    'active' => ['clavestelefonicas*'],
                 ],
             ],
         ],
@@ -291,6 +312,7 @@ return [
                     'text' => 'Enlaces (Servicios)',
                     'url'  => 'enlaces',
                     'icon' => 'fas fa-fw fa-unlink',
+                    'active' => ['enlaces*'],
                 ],
                 [
                     'text' => 'Catalogos',
@@ -299,14 +321,17 @@ return [
                         [
                             'text' => 'Tipos',
                             'url'  => 'enlacestipos',
+                            'active' => ['enlacestipos*'],
                         ],
                         [
                             'text' => 'Provedores',
                             'url'  => 'enlacesprovedores',
+                            'active' => ['enlacesprovedores*'],
                         ],
                         [
                             'text' => 'Status',
                             'url'  => 'enlacesstatus',
+                            'active' => ['enlacesstatus*'],
                         ],
                     ],
                 ],
@@ -322,10 +347,12 @@ return [
                     'text' => 'Asignaciones',
                     'url'  => 'extensiones',
                     'icon' => 'fas fa-fw fa-user-check',
+                    'active' => ['extensiones*'],
                 ],
                 [
                     'text' => 'Tipos',
                     'url'  => 'extensionestipo',
+                    'active' => ['extensionestipo*'],
                 ],
             ],
         ],
@@ -339,6 +366,7 @@ return [
                     'text' => 'Plataformas',
                     'url'  => 'plataformas',
                     'icon' => 'fas fa-fw fa-server',
+                    'active' => ['plataformas*'],
                 ],
                 [
                     'text' => 'Catalogos',
@@ -347,18 +375,22 @@ return [
                         [
                             'text' => 'Tipos',
                             'url'  => 'plataformastipo',
+                            'active' => ['plataformastipo*'],
                         ],
                         [
                             'text' => 'Marcas',
                             'url'  => 'plataformasmarca',
+                            'active' => ['plataformasmarca*'],
                         ],
                         [
                             'text' => 'Provedores',
                             'url'  => 'plataformasprovedor',
+                            'active' => ['plataformasprovedor*'],
                         ],
                         [
                             'text' => 'Status',
                             'url'  => 'plataformasstatus',
+                            'active' => ['plataformasstatus*'],
                         ],
                     ],
                 ],
@@ -374,11 +406,13 @@ return [
                     'text' => 'Inventario',
                     'url'  => 'soporte',
                     'icon' => 'fas fa-fw fa-laptop',
+                    'active' => ['soporte*'],
                 ],
                 [
                     'text' => 'Asignaciones',
                     'url'  => 'asignacionsoporte',
                     'icon' => 'fas fa-fw fa-user-check',
+                    'active' => ['asignacionsoporte*'],
                 ],
                 [
                     'text' => 'Catalogos',
@@ -387,22 +421,27 @@ return [
                         [
                             'text' => 'Tipos',
                             'url'  => 'soportetipo',
+                            'active' => ['soportetipo*'],
                         ],
                         [
                             'text' => 'Marcas',
                             'url'  => 'soportemarca',
+                            'active' => ['soportemarca*'],
                         ],
                         [
                             'text' => 'Provedores',
                             'url'  => 'soporteprovedor',
+                            'active' => ['soporteprovedor*'],
                         ],
                         [
                             'text' => 'Status',
                             'url'  => 'soportestatus',
+                            'active' => ['soportestatus*'],
                         ],
                         [
                             'text' => 'Owner',
                             'url'  => 'soporteowner',
+                            'active' => ['soporteowner*'],
                         ],
                     ],
                 ],
@@ -418,16 +457,19 @@ return [
                     'text' => 'Planes',
                     'url'  => 'movilplan',
                     'icon' => 'fas fa-fw fa-wifi',
+                    'active' => ['movilplan*'],
                 ],
                 [
                     'text' => 'Equipos',
                     'url'  => 'movil',
                     'icon' => 'fas fa-fw fa-mobile-alt',
+                    'active' => ['movil*'],
                 ],
                 [
                     'text' => 'Asignaciones',
                     'url'  => 'asignacionmovil',
                     'icon' => 'fas fa-fw fa-user-check',
+                    'active' => ['asignacionmovil*'],
                 ],
                 [
                     'text' => 'Catalogos',
@@ -436,18 +478,22 @@ return [
                         [
                             'text' => 'Tipos',
                             'url'  => 'moviltipo',
+                            'active' => ['moviltipo*'],
                         ],
                         [
                             'text' => 'Marcas',
                             'url'  => 'movilmarca',
+                            'active' => ['movilmarca*'],
                         ],
                         [
                             'text' => 'Status',
                             'url'  => 'movilstatus',
+                            'active' => ['movilstatus*'],
                         ],
                         [
                             'text' => 'Tipos de Planes',
                             'url'  => 'plantipo',
+                            'active' => ['plantipo*'],
                         ],
                     ],
                 ],

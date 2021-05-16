@@ -106,3 +106,6 @@ Route::get('searchmovil', 'MovilController@searchMovil')->name('buscarmovil')->m
 Route::get('searchplan', 'MovilPlanController@searchPlan')->name('buscarplan')->middleware('auth');
 Route::get('resposivamovil/{asignacionmovil}', 'AssignedMovilController@responsiva')->name('responsiva_movil')->middleware('auth');
 
+Route::name('admin')->resource('roles', Admin\RoleController::class)->names('roles');
+Route::name('admin')->resource('users', Admin\UserController::class)->only('index','edit','update')->names('users');
+
