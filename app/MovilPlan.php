@@ -31,4 +31,14 @@ class MovilPlan extends Model
     {
         return $query->where('asignado','0');
     }
+
+    public function getFechadeinicioAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->format('Y-m-d');
+    }
+
+    public function getFechadeterminoAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->format('Y-m-d');
+    }
 }

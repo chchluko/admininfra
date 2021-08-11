@@ -10,14 +10,19 @@ class AssignedMovil extends Model
         'nomina', 'movil_id', 'comentario',
         'condiciones'    ];
 
-    public function movil()
+    public function imei()
     {
         return $this->hasOne('App\Movil','id','movil_id');
     }
 
-    public function plan()
+    public function lineatelefonica()
     {
         return $this->hasOne('App\MovilPlan','id','movil_plan_id');
+    }
+
+    public function nomina()
+    {
+        return $this->hasOne('App\Empleado','NOMINA','nomina');
     }
 
     public function scopeBuscarpor($query, $tipo, $nombre)

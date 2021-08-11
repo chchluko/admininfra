@@ -26,7 +26,7 @@ class AssignedMovilController extends Controller
     {
         $filtros = $this->filtros;
         $resultado = AssignedMovil::where('comentario', '')->paginate(15);
-        return view('movil.asignacion.index', compact('resultado'),compact('filtros'));
+        return view('movil.asignacion.index', compact('resultado','filtros'));
     }
 
     /**
@@ -36,7 +36,7 @@ class AssignedMovilController extends Controller
      */
     public function create()
     {
-        $empleados = Empleado::select('NOMBRE', 'APELLIDOPATERNO', 'APELLIDOMATERNO', 'NOMINA')->active()->orderBy('NOMBRE')->get()->pluck('full_name', 'NOMINA')->prepend('Seleccione', 0);
+        $empleados = Empleado::select('NOMBRE', 'APELLIDOPATERNO', 'APELLIDOMATERNO', 'NOMINA')->active()->orderBy('NOMBRE')->get()->pluck('NOMINA', 'NOMINA')->prepend('Seleccione', 0);
         $movils = Movil::asignada()->get()->pluck('imei', 'id')->prepend('Seleccione', 0);
         return view('movil.asignacion.create', compact('empleados', 'movils'));
     }
@@ -85,9 +85,12 @@ class AssignedMovilController extends Controller
      * @param  \App\AssignedMovil  $assignedMovil
      * @return \Illuminate\Http\Response
      */
-    public function edit(AssignedMovil $assignedMovil)
+    public function edit(AssignedMovil $asignacionmovil)
     {
-        //
+        $empleados = Empleado::select('NOMBRE', 'APELLIDOPATERNO', 'APELLIDOMATERNO', 'NOMINA')->active()
+        ->orderBy('NOMBRE')->get()->pluck('NOMINA', 'NOMINA')->prepend('Seleccione', 0);
+        $movils = Movil::get()->pluck('imei', 'id')->prepend('Seleccione', 0);
+       return view('movil.asignacion.edit', compact('empleados','movils','asignacionmovil'));
     }
 
     /**
@@ -97,9 +100,10 @@ class AssignedMovilController extends Controller
      * @param  \App\AssignedMovil  $assignedMovil
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AssignedMovil $assignedMovil)
+    public function update(Request $request, AssignedMovil $asignacionmovil)
     {
-        //
+        $asignacionmovil->update($request->all());
+        return redirect('asignacionmovil')->with('info', "Asignación Actualizada correctamente");
     }
 
     /**

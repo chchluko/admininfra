@@ -24,7 +24,7 @@ class Movil extends Model
         return $this->belongsTo('App\MovilMark','mark_id','id');
     }
 
-    public function plan()
+    public function lineatelefonica()
     {
         return $this->hasOne('App\MovilPlan','id','movil_plan_id');
     }

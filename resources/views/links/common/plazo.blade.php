@@ -1,5 +1,5 @@
-<label for="plazo">Plazo (meses)</label>
-<input type="number" name="plazo" class="form-control {{ $errors->has('plazo') ? 'field-error' : '' }}" id="plazo" placeholder="Meses" value="{{ $enlace->plazo ?? old('plazo') }}">
-@if ($errors->has('plazo'))
-  <span class="error-message">{{ $errors->first('plazo') }}</span>
-@endif
+{!! Form::label('plazo', 'Plazo (meses)') !!}
+{!! Form::text('plazo', null, ['class'=>'form-control','placeholder'=>'Meses']) !!}
+@error('plazo')
+<span class="error-message">{{ $message }}</span>
+@enderror

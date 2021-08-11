@@ -463,7 +463,7 @@ return [
                     'text' => 'Equipos',
                     'url'  => 'movil',
                     'icon' => 'fas fa-fw fa-mobile-alt',
-                    'active' => ['movil*'],
+                    'active' => ['movil'],
                 ],
                 [
                     'text' => 'Asignaciones',

@@ -23,11 +23,11 @@
   <tbody>
     <tr align="center">
       <td>1</td>
-      <td>{{ $asignacionmovil->movil->tipo->tipo }}</td>
-      <td>{{ $asignacionmovil->movil->marca->marca }}</td>
-      <td>{{ $asignacionmovil->movil->modelo }}</td>
-      <td>{{ $asignacionmovil->plan->lineatelefonica }}</td>
-      <td>{{ $asignacionmovil->movil->imei }}</td>
+      <td>{{ $asignacionmovil->imei->tipo->tipo }}</td>
+      <td>{{ $asignacionmovil->imei->marca->marca }}</td>
+      <td>{{ $asignacionmovil->imei->modelo }}</td>
+      <td>{{ $asignacionmovil->lineatelefonica->lineatelefonica }}</td>
+      <td>{{ $asignacionmovil->imei->imei }}</td>
     </tr>
   </tbody>
 </table>

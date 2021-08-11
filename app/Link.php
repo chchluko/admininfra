@@ -36,4 +36,9 @@ class Link extends Model
         }
         return $query;
     }
+
+    public function getFcontratacionAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->format('Y-m-d');
+    }
 }

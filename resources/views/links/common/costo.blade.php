@@ -1,5 +1,5 @@
-<label for="costo">Costo Mensual</label>
-<input type="text" name="costo" class="form-control {{ $errors->has('costo') ? 'field-error' : '' }}" id="costo" placeholder="Costo Mensual" value="{{ $enlace->costo ?? old('costo') }}">
-@if ($errors->has('costo'))
-  <span class="error-message">{{ $errors->first('costo') }}</span>
-@endif
+{!! Form::label('costo', 'Costo Mensual') !!}
+{!! Form::text('costo', null, ['class'=>'form-control','placeholder'=>'$ 0.00']) !!}
+@error('costo')
+<span class="error-message">{{ $message }}</span>
+@enderror

@@ -15,7 +15,8 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            @include('partials.form.search',['target' => 'buscarmovilasig','filtro'=>$filtros])
+            @livewire('assigned-movil.assigned-movils-index')
+         {{--    @include('partials.form.search',['target' => 'buscarmovilasig','filtro'=>$filtros])--}}
             @include('partials.flash')
             @if ($resultado->count() > 0)
             <table class="table">
@@ -33,7 +34,7 @@
                     @foreach ($resultado as $movilasignado)
                                 <tr>
                                     <td>{{ $movilasignado->movil->imei }}</td>
-                                    <td>{{ $movilasignado->movil->plan->lineatelefonica }}</td>
+                                    <td>{{ $movilasignado->movil->lineatelefonica->lineatelefonica }}</td>
                                     <td>{{ $movilasignado->condiciones }}</td>
                                     <td>@if ($movilasignado->activo == 1)
                                             <span class="badge badge-success"> Activo </span>
@@ -60,7 +61,7 @@
             @endif
         </div>
         <!-- /.card-body -->
-        <div class="card-footer clearfix">
+        <div class="clearfix card-footer">
             @include('partials.paginacion')
         </div>
       </div>

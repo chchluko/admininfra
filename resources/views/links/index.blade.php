@@ -16,9 +16,11 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            @include('partials.form.search',['target' => 'buscarlink','filtro'=> $filtros ])
+            @livewire('link.links-index')
+
+          {{--  @include('partials.form.search',['target' => 'buscarlink','filtro'=> $filtros ]) --}}
             @include('partials.flash')
-            @if ($resultado->count() > 0)
+            @if ($resultado->count() > 20)
             <table class="table">
                 <thead>
                     <th>Provedor</th>
@@ -44,7 +46,7 @@
                                         <td>$ {!! number_format($servicio->costo, 2, '.', ','); !!}</td>
                                         <td>{{ \Carbon\Carbon::parse($servicio->fcontratacion)->format('d/m/Y') }}</td>
                                         <td>{{ \Carbon\Carbon::parse($servicio->updated_at)->format('d/m/Y') }}</td>
-                                        <td class="text-right py-0 align-middle">
+                                        <td class="py-0 text-right align-middle">
                                             <div class="btn-group btn-group-sm">
                                               <a href="{{ route('enlaces.edit',$servicio->id ) }}" class="btn btn-default"><i class="fas fa-edit"></i></a>
                                               <a href="{{ route('enlaces.show',$servicio->id ) }}" class="btn btn-default"><i class="fas fa-eye"></i></a>
@@ -57,7 +59,7 @@
             @endif
         </div>
         <!-- /.card-body -->
-        <div class="card-footer clearfix">
+        <div class="clearfix card-footer">
             @include('partials.paginacion')
         </div>
       </div>

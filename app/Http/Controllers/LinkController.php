@@ -41,7 +41,7 @@ class LinkController extends Controller
         $provedores = LinkProvider::get()->pluck('provedor', 'id')->prepend('Seleccione', 0);
         $status = LinkStatus::get()->pluck('status', 'id')->prepend('Seleccione', 0);
         $ubicaciones = Ubicacion::orderBy('NOMBRE_AREA')->pluck('NOMBRE_AREA', 'IDAREA')->prepend('Seleccione', 0);
-        return view('links.create', compact('tipos', 'provedores', 'status', 'ubicaciones'));
+        return view('links.create_new', compact('tipos', 'provedores', 'status', 'ubicaciones'));
     }
 
     /**
@@ -107,7 +107,8 @@ class LinkController extends Controller
         $provedores = LinkProvider::get()->pluck('provedor', 'id')->prepend('Seleccione', 0);
         $status = LinkStatus::get()->pluck('status', 'id')->prepend('Seleccione', 0);
         $ubicaciones = Ubicacion::orderBy('NOMBRE_AREA')->pluck('NOMBRE_AREA', 'IDAREA')->prepend('Seleccione', 0);
-        return view('links.edit', compact('tipos', 'provedores', 'status', 'ubicaciones', 'enlace'));
+
+        return view('links.edit_new', compact('tipos', 'provedores', 'status', 'ubicaciones', 'enlace'));
     }
 
     /**

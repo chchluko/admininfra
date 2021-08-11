@@ -1,6 +1,6 @@
-<label for="noserie">Número de Serie</label>
-<input type="text" name="noserie" class="form-control {{ $errors->has('noserie') ? 'field-error' : '' }}"
-id="noserie" placeholder="########" value="{{ $noserie ?? old('noserie') }}">
-@if ($errors->has('noserie'))
-    <span class="error-message">{{ $errors->first('noserie') }}</span>
-@endif
+
+{!! Form::label('noserie', 'Número de Serie') !!}
+{!! Form::text('noserie', null, ['class'=>'form-control','placeholder'=>'######']) !!}
+@error('noserie')
+<span class="error-message">{{ $message }}</span>
+@enderror

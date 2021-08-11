@@ -26,7 +26,7 @@ class MovilController extends Controller
     public function index()
     {
         $filtros = $this->filtros;
-        $resultado = Movil::where('comentario', '')->paginate(15);
+        $resultado = Movil::where('comentario', '3')->paginate(15);
         return view('movil.index', compact('resultado','filtros'));
     }
 
@@ -79,7 +79,11 @@ class MovilController extends Controller
      */
     public function edit(Movil $movil)
     {
-        //
+        $tipos = MovilType::get()->pluck('tipo','id')->prepend('Seleccione',0);
+        $status = MovilStatus::get()->pluck('status','id')->prepend('Seleccione',0);
+        $marcas = MovilMark::get()->pluck('marca','id')->prepend('Seleccione',0);
+        $lineas = MovilPlan::get()->pluck('lineatelefonica','id')->prepend('Seleccione',0);
+        return view('movil.edit',compact('movil','tipos','status','marcas','lineas'));
     }
 
     /**

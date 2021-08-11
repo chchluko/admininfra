@@ -8,11 +8,11 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <form class="form" action="{{ route('buscarmail') }}" method="GET">
+            <!--form class="form" action="{{-- route('buscarmail') --}}" method="GET">
                 <div class="form-group">
                     <div class="input-group input-group-lg">
-                        <input type="buscarpor" class="form-control form-control-lg {{ $errors->has('buscarpor') ? 'field-error' : '' }}"
-                        placeholder="correo@dominio.com" name="buscarpor" value="{{ old('buscarpor') }}">
+                        <input type="buscarpor" class="form-control form-control-lg {{-- $errors->has('buscarpor')?'field-error':'' --}}"
+                        placeholder="correo@dominio.com" name="buscarpor" value="{{-- old('buscarpor') --}}">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-lg btn-default">
                                 <i class="fa fa-search"></i>
@@ -20,7 +20,8 @@
                         </div>
                     </div>
                 </div>
-            </form>
+            </form -->
+         @livewire('email.emails-index')
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -67,7 +68,7 @@
             @endforeach
         </div>
         <!-- /.card-body -->
-        <div class="card-footer clearfix">
+        <div class="clearfix card-footer">
             @can('create email')
              <a type="link" href="emails/create" class="btn btn-default"><i class="fas fa-plus"></i> Registrar Nuevo Correo</a>
             @endcan
