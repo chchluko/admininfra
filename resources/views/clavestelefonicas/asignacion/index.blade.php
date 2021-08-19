@@ -15,7 +15,8 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            @include('partials.form.search',['target' => 'buscarclaveasignada','filtro'=>$filtros])
+           {{--  @include('partials.form.search',['target' => 'buscarclaveasignada','filtro'=>$filtros]) --}}
+            @livewire('assigned-key.assigned-keys-index')
             @include('partials.flash')
             @if ($resultado->count() > 0)
             <table class="table">
@@ -54,8 +55,8 @@
             @endif
         </div>
         <!-- /.card-body -->
-        <div class="card-footer clearfix">
-            @include('partials.paginacion')
+        <div class="clearfix card-footer">
+          {{--   @include('partials.paginacion')--}}
         </div>
       </div>
 @stop

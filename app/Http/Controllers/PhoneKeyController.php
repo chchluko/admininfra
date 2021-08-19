@@ -14,7 +14,7 @@ class PhoneKeyController extends Controller
      */
     public function index()
     {
-        $resultado = PhoneKey::paginate(15);
+        $resultado = PhoneKey::where('comentario',3)->paginate(15);
         return view('clavestelefonicas.index',compact('resultado'));
     }
 
@@ -67,9 +67,9 @@ class PhoneKeyController extends Controller
      * @param  \App\PhoneKey  $phoneKey
      * @return \Illuminate\Http\Response
      */
-    public function edit(PhoneKey $phoneKey)
+    public function edit(PhoneKey $clavestelefonica)
     {
-        //
+        return view('clavestelefonicas.edit',compact('clavestelefonica'));
     }
 
     /**
@@ -79,9 +79,10 @@ class PhoneKeyController extends Controller
      * @param  \App\PhoneKey  $phoneKey
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PhoneKey $phoneKey)
+    public function update(Request $request, PhoneKey $clavestelefonica)
     {
-        //
+        $clavestelefonica->update($request->all());
+        return redirect('clavestelefonicas');
     }
 
     /**

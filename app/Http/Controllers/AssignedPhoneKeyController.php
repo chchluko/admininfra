@@ -25,7 +25,7 @@ class AssignedPhoneKeyController extends Controller
     public function index()
     {
         $filtros = $this->filtros;
-        $resultado = AssignedPhoneKey::where('comentario', '')->paginate(15);
+        $resultado = AssignedPhoneKey::latest()->take(0) ->get();
         return view('clavestelefonicas.asignacion.index', compact('resultado','filtros'));
     }
 
@@ -100,9 +100,11 @@ class AssignedPhoneKeyController extends Controller
      * @param  \App\AssignedPhoneKey  $assignedPhoneKey
      * @return \Illuminate\Http\Response
      */
-    public function edit(AssignedPhoneKey $assignedPhoneKey)
+    public function edit(AssignedPhoneKey $asignacionclafe)
     {
-        //
+        $empleados = Empleado::select('NOMBRE','APELLIDOPATERNO','APELLIDOMATERNO','NOMINA')->active()->orderBy('NOMBRE')->get()->pluck('full_name','NOMINA')->prepend('Seleccione',0);
+        $claves = PhoneKey::pluck('clave','id')->prepend('Seleccione',0);
+        return view('clavestelefonicas.asignacion.edit', compact('asignacionclafe', 'empleados', 'claves'));
     }
 
     /**
@@ -112,9 +114,10 @@ class AssignedPhoneKeyController extends Controller
      * @param  \App\AssignedPhoneKey  $assignedPhoneKey
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AssignedPhoneKey $assignedPhoneKey)
+    public function update(Request $request, AssignedPhoneKey $asignacionclafe)
     {
-        //
+        $asignacionclafe->update($request->all());
+        return redirect('asignacionclaves')->with('info', "Asignación actualizada correctamente");
     }
 
     /**

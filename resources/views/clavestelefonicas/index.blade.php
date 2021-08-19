@@ -8,48 +8,18 @@
 @section('content')
     <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title">Todas las Claves</h3>
+            <h3 class="card-title">Claves telefonicas</h3>
                 <div class="card-tools">
                     <a type="link" href="clavestelefonicas/create" class="btn btn-tool"><i class="fas fa-plus"></i></a>
                 </div>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            @include('partials.flash')            <table class="table">
-                <thead>
-                    <th>Clave</th>
-                    <th>Comentario</th>
-                    <th>Status</th>
-                    <th>Ultima modificacion</th>
-                    <th>Accion</th>
-                </thead>
-                <tbody>
-            @foreach ($resultado as $claves)
-                        <tr>
-                            <td>{{ $claves->clave }}</td>
-                            <td>{{ $claves->comentario }}</td>
-                            <td>@if ($claves->activo == 1)
-                                    <span class="badge badge-success"> Activa </span>
-                                @else
-                                    <span class="badge badge-info"> Inactiva </span>
-                                @endif
-                                @if ($claves->asignado == 1)
-                                    <span class="badge badge-success"> Asignada </span>
-                                @else
-                                    <span class="badge badge-info"> Libre </span>
-                                @endif
-                            <td>{{ \Carbon\Carbon::parse($claves->updated_at)->format('d/m/Y H:i') }}</td>
-                            </td>
-                            <td>
-
-                            </td>
-                        </tr>
-
-            @endforeach                </tbody>
-            </table>
+            @livewire('phone-key.phone-keys-index')
+            @include('partials.flash')
         </div>
         <!-- /.card-body -->
-        <div class="card-footer clearfix">
+        <div class="clearfix card-footer">
             @include('partials.paginacion')
         </div>
       </div>
