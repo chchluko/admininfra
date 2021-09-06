@@ -42,6 +42,7 @@
                     <td>{{ $clavesasignada->comentario }}</td>
                     <td>{{ \Carbon\Carbon::parse($clavesasignada->updated_at)->format('d/m/Y H:i') }}</td>
                     <td>
+                        <a type="link" href="{{ route('responsiva_key',$clavesasignada->id) }}" class="btn btn-default"><i class="fas fa-file-pdf"></i></a>
                         <a type="link" href="{{ route('asignacionclaves.edit',$clavesasignada->id) }}" class="btn btn-default"><i class="fas fa-edit"></i></a>
                     </td>
                 </tr>

@@ -15,7 +15,8 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            @include('partials.form.search',['target' => 'buscarextension','filtro'=>$filtros ])
+            @livewire('extension.extensions-index')
+        {{--     @include('partials.form.search',['target' => 'buscarextension','filtro'=>$filtros ])--}}
             @include('partials.flash')
             @if ($resultado->count() > 0)
             <table class="table">
@@ -56,7 +57,7 @@
         @endif
         </div>
         <!-- /.card-body -->
-        <div class="card-footer clearfix">
+        <div class="clearfix card-footer">
             @include('partials.paginacion')
         </div>
       </div>

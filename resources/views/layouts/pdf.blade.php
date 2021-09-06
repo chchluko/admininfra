@@ -25,7 +25,7 @@
           color: #001028;
           background: #FFFFFF;
           font-family: Arial, sans-serif;
-          font-size: 14px;
+          font-size: 13px;
           font-family: Arial;
              }
 
@@ -116,7 +116,7 @@
 
 
           @page {
-          margin-bottom: 2cm;
+          margin-bottom: 1cm;
         }
 
         #header,

@@ -65,6 +65,7 @@ Route::resource('ubicaciones', UbicacionController::class)->middleware('auth');
 Route::resource('clavestelefonicas', PhoneKeyController::class)->middleware('auth');
 Route::resource('asignacionclaves', AssignedPhoneKeyController::class)->middleware('auth');
 Route::get('searchclaveasig', 'AssignedPhoneKeyController@searchAssignedKey')->name('buscarclaveasignada')->middleware('auth');
+Route::get('asignacionclaves/{asignacionclafe}/responsiva', 'AssignedPhoneKeyController@responsiva')->name('responsiva_key')->middleware('auth');
 
 Route::resource('enlacesprovedores', LinkProviderController::class)->middleware('auth');
 Route::resource('enlacestipos', LinkTypeController::class)->middleware('auth');
@@ -105,6 +106,7 @@ Route::get('searchmovilasig', 'AssignedMovilController@searchAssignedMovil')->na
 Route::get('searchmovil', 'MovilController@searchMovil')->name('buscarmovil')->middleware('auth');
 Route::get('searchplan', 'MovilPlanController@searchPlan')->name('buscarplan')->middleware('auth');
 Route::get('resposivamovil/{asignacionmovil}', 'AssignedMovilController@responsiva')->name('responsiva_movil')->middleware('auth');
+Route::get('reportassignedmovil', 'AssignedMovilController@reportAssignedMovils')->name('assignedmovilreport')->middleware('auth');
 
 Route::name('admin')->resource('roles', Admin\RoleController::class)->names('roles');
 Route::name('admin')->resource('users', Admin\UserController::class)->only('index','edit','update')->names('users');

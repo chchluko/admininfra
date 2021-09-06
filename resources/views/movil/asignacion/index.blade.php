@@ -10,6 +10,7 @@
         <div class="card-header">
             <h3 class="card-title">Asignaciones de Equipos</h3>
             <div class="card-tools">
+            <a type="link" href="reportassignedmovil" class="btn btn-tool"><i class="fas fa-download"></i></a>
                 <a type="link" href="asignacionmovil/create" class="btn btn-tool"><i class="fas fa-plus"></i></a>
             </div>
         </div>

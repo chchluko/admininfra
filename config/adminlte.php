@@ -312,7 +312,7 @@ return [
                     'text' => 'Enlaces (Servicios)',
                     'url'  => 'enlaces',
                     'icon' => 'fas fa-fw fa-unlink',
-                    'active' => ['enlaces*'],
+                    'active' => ['enlaces'],
                 ],
                 [
                     'text' => 'Catalogos',
@@ -347,7 +347,7 @@ return [
                     'text' => 'Asignaciones',
                     'url'  => 'extensiones',
                     'icon' => 'fas fa-fw fa-user-check',
-                    'active' => ['extensiones*'],
+                    'active' => ['extensiones/*'],
                 ],
                 [
                     'text' => 'Tipos',
@@ -366,7 +366,7 @@ return [
                     'text' => 'Plataformas',
                     'url'  => 'plataformas',
                     'icon' => 'fas fa-fw fa-server',
-                    'active' => ['plataformas*'],
+                    'active' => ['plataformas'],
                 ],
                 [
                     'text' => 'Catalogos',

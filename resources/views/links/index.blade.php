@@ -43,7 +43,7 @@
                                         <td>{{ $servicio->referencia }}</td>
                                         <td>{{ $servicio->plazo }} meses</td>
                                         <td>{{ $servicio->anchodebanda }} MB</td>
-                                        <td>$ {!! number_format($servicio->costo, 2, '.', ','); !!}</td>
+                                        <td>$ {{--!! number_format($servicio->costo, 2, '.', ','); !!--}}</td>
                                         <td>{{ \Carbon\Carbon::parse($servicio->fcontratacion)->format('d/m/Y') }}</td>
                                         <td>{{ \Carbon\Carbon::parse($servicio->updated_at)->format('d/m/Y') }}</td>
                                         <td class="py-0 text-right align-middle">

@@ -39,6 +39,43 @@
                     @include('links.common.contratacion')
                 </div>
             </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    {!! Form::label('ipmanagment', 'IP Managment') !!}
+                    {!! Form::text('ipmanagment', null, ['class'=>'form-control']) !!}
+                    @error('ipmanagment')
+                    <span class="error-message">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="col-3">
+                    {!! Form::label('ipfija', 'IP Fija') !!}
+                    {!! Form::text('ipfija', null, ['class'=>'form-control']) !!}
+                    @error('ipfija')
+                    <span class="error-message">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="col-2">
+                    {!! Form::label('ipmpls', 'IP MPLS') !!}
+                    {!! Form::text('ipmpls', null, ['class'=>'form-control']) !!}
+                    @error('ipmpls')
+                    <span class="error-message">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="col-2">
+                    {!! Form::label('segmento', 'Segmento') !!}
+                    {!! Form::text('segmento', null, ['class'=>'form-control']) !!}
+                    @error('segmento')
+                    <span class="error-message">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="col-2">
+                    {!! Form::label('tamanompls', 'Tamaño MPLS') !!}
+                    {!! Form::text('tamanompls', null, ['class'=>'form-control']) !!}
+                    @error('tamanompls')
+                    <span class="error-message">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
             @include('partials.form.comentario')
     </div>
     <!-- /.card-body -->

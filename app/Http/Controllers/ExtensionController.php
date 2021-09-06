@@ -99,9 +99,12 @@ class ExtensionController extends Controller
      * @param  \App\Extension  $extension
      * @return \Illuminate\Http\Response
      */
-    public function edit(Extension $extension)
+    public function edit(Extension $extensione)
     {
-        //
+        $empleados = Empleado::select('NOMBRE','APELLIDOPATERNO','APELLIDOMATERNO','NOMINA')->active()->orderBy('NOMBRE')->get()->pluck('full_name','NOMINA')->prepend('Seleccione',0);
+        $ubicaciones = Ubicacion::orderBy('NOMBRE_AREA')->pluck('NOMBRE_AREA','IDAREA')->prepend('Seleccione',0);
+        $tipos = ExtensionType::get()->pluck('tipo','id')->prepend('Seleccione',0);
+        return view('extensiones.edit', compact('extensione','empleados','ubicaciones','tipos'));
     }
 
     /**
@@ -111,9 +114,10 @@ class ExtensionController extends Controller
      * @param  \App\Extension  $extension
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Extension $extension)
+    public function update(Request $request, Extension $extensione)
     {
-        //
+        $extensione->update($request->all());
+        return redirect('extensiones');
     }
 
     /**

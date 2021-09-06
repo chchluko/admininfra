@@ -131,7 +131,6 @@ class AssignedPhoneKeyController extends Controller
         //
     }
 
-
     public function searchAssignedKey(Request $request)
     {
         $rules = [
@@ -155,6 +154,15 @@ class AssignedPhoneKeyController extends Controller
         return redirect()->route('asignacionclaves.index')->with('info', "No hay resultados que coincidan")->withInput();
     }
 
+    public function responsiva(AssignedPhoneKey $asignacionclafe){
 
+        $view =  \View::make('clavestelefonicas.pdf.responsiva', compact('asignacionclafe'))->render();
+        $pdf = \App::make('dompdf.wrapper');
 
+        $pdf->loadHTML($view);
+
+        $pdf->setPaper('letter', 'portrait');
+        return $pdf->download('Responsiva.pdf');
+        // return $pdf->stream();
+    }
 }

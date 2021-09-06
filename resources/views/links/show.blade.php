@@ -20,29 +20,81 @@ Modificado: {{ \Carbon\Carbon::parse($enlace->updated_at)->format('d/m/Y') }}
     </div>
     <div class="card-body">
       <div class="row">
-        <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+        <div class="order-2 col-12 col-md-12 col-lg-8 order-md-1">
           <div class="row">
             <div class="col-12 col-sm-4">
               <div class="info-box bg-light">
                 <div class="info-box-content">
-                  <span class="info-box-text text-center text-muted">Referencia</span>
-                  <span class="info-box-number text-center text-muted mb-0">{{ $enlace->referencia }}</span>
+                  <span class="text-center info-box-text text-muted">Referencia</span>
+                  <span class="mb-0 text-center info-box-number text-muted">{{ $enlace->referencia }}</span>
                 </div>
               </div>
             </div>
             <div class="col-12 col-sm-4">
               <div class="info-box bg-light">
                 <div class="info-box-content">
-                  <span class="info-box-text text-center text-muted">Ancho de Banda</span>
-                  <span class="info-box-number text-center text-muted mb-0">{{ $enlace->anchodebanda }} MB</span>
+                  <span class="text-center info-box-text text-muted">Ancho de Banda (MB)</span>
+                  <span class="mb-0 text-center info-box-number text-muted">{{ $enlace->anchodebanda }}</span>
                 </div>
               </div>
             </div>
             <div class="col-12 col-sm-4">
               <div class="info-box bg-light">
                 <div class="info-box-content">
-                  <span class="info-box-text text-center text-muted">Provedor</span>
-                  <span class="info-box-number text-center text-muted mb-0">{{ $enlace->provedor->provedor }}</span>
+                  <span class="text-center info-box-text text-muted">Proveedor</span>
+                  <span class="mb-0 text-center info-box-number text-muted">{{ $enlace->provedor->provedor }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-4">
+              <div class="info-box bg-light">
+                <div class="info-box-content">
+                  <span class="text-center info-box-text text-muted">IP Managment</span>
+                  <span class="mb-0 text-center info-box-number text-muted">{{ $enlace->ipmanagment }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-4">
+              <div class="info-box bg-light">
+                <div class="info-box-content">
+                  <span class="text-center info-box-text text-muted">IP MPLS</span>
+                  <span class="mb-0 text-center info-box-number text-muted">{{ $enlace->ipmpls }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-4">
+              <div class="info-box bg-light">
+                <div class="info-box-content">
+                  <span class="text-center info-box-text text-muted">IP Fija</span>
+                  <span class="mb-0 text-center info-box-number text-muted">{{ $enlace->ipfija }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-4">
+              <div class="info-box bg-light">
+                <div class="info-box-content">
+                  <span class="text-center info-box-text text-muted">Segmento</span>
+                  <span class="mb-0 text-center info-box-number text-muted">{{ $enlace->segmento }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-4">
+              <div class="info-box bg-light">
+                <div class="info-box-content">
+                  <span class="text-center info-box-text text-muted">Tamaño MPLS</span>
+                  <span class="mb-0 text-center info-box-number text-muted">{{ $enlace->tamanompls }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-4">
+              <div class="info-box bg-light">
+                <div class="info-box-content">
+                  <span class="text-center info-box-text text-muted">Tipo</span>
+                  <span class="mb-0 text-center info-box-number text-muted">{{ $enlace->tipo->tipo }}</span>
                 </div>
               </div>
             </div>
@@ -61,20 +113,17 @@ Modificado: {{ \Carbon\Carbon::parse($enlace->updated_at)->format('d/m/Y') }}
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
+        <div class="order-1 col-12 col-md-12 col-lg-4 order-md-2">
           <h3 class="text-primary"><i class="fas fa-map-marker-alt"></i> Ubicación</h3>
           <p class="text-muted">{{ $enlace->ubicacion->NOMBRE_AREA }} <br>
             {{ $enlace->ubicacion->FullAddress }}</p>
           <br>
           <div class="text-muted">
-            <p class="text-sm">Tipo
-              <b class="d-block">{{ $enlace->tipo->tipo }}</b>
-            </p>
             <p class="text-sm">Status
                 <b class="d-block">{{ $enlace->status->status }}</b>
               </p>
               <p class="text-sm">Costo Mensual
-                <b class="d-block">$ {!! number_format($enlace->costo, 2, '.', ','); !!}</b>
+                <b class="d-block">$ {{-- !!number_format($enlace->costo,2,'.',',');!! --}}</b>
               </p>
               <p class="text-sm">Fecha de contratación
                 <b class="d-block">{{ \Carbon\Carbon::parse($enlace->fcontratacion)->format('d/m/Y') }}</b>
@@ -89,8 +138,8 @@ Modificado: {{ \Carbon\Carbon::parse($enlace->updated_at)->format('d/m/Y') }}
 
           </div>
 
-          <div class="text-center mt-5 mb-3">
-            <a type="link" href="{{ url()->previous() }}" class="btn btn-default float-right">Regresar</a>
+          <div class="mt-5 mb-3 text-center">
+            <a type="link" href="{{ url()->previous() }}" class="float-right btn btn-default">Regresar</a>
           </div>
         </div>
       </div>

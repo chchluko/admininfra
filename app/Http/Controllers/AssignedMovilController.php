@@ -8,6 +8,10 @@ use App\AssignedMovil;
 use App\MovilPlan;
 use Illuminate\Http\Request;
 
+use App\Exports\AssignedMovilsExport;
+use Maatwebsite\Excel\Facades\Excel;
+
+
 class AssignedMovilController extends Controller
 {
 
@@ -164,5 +168,10 @@ class AssignedMovilController extends Controller
         $pdf->setPaper('letter', 'portrait');
         return $pdf->download('Responsiva.pdf');
         // return $pdf->stream();
+    }
+
+    public function reportAssignedMovils()
+    {
+         return Excel::download(new AssignedMovilsExport, 'asignacionmovil.xlsx');
     }
 }
