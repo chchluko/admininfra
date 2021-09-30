@@ -15,6 +15,7 @@ class ExtensionController extends Controller
 
     public function __construct()
     {
+        $this->middleware('role:telecom|telefonia');
         $this->filtros = ['0'=>'Seleccione un tipo','nomina'=>'Número de Nómina','extension'=>'Extensión','modelo'=>'Modelo del Equipo','nombre'=>'Nombre'];
     }
     /**

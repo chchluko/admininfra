@@ -16,6 +16,7 @@ class LinkController extends Controller
 
     public function __construct()
     {
+        $this->middleware('role:telecom|enlaces');
         $this->filtros = ['0' => 'Seleccione un tipo', 'referencia' => 'Referencia', 'anchodebanda' => 'Ancho de Banda'];
     }
     /**

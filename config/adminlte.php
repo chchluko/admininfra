@@ -286,7 +286,7 @@ return [
             'text' => 'Claves Telefonicas',
             'icon' => 'fas fa-fw fa-phone',
             //'can'  => 'tester',
-            'roles' => ['telecom',],
+            'roles' => ['telecom','telefonia'],
             'submenu' => [
                 [
                     'text' => 'Asignaciones',
@@ -306,7 +306,7 @@ return [
             'text'    => 'Enlaces & Lineas',
             'icon'    => 'fas fa-fw fa-link',
             //'can'  => 'tester',
-            'roles' => ['telecom',],
+            'roles' => ['telecom','enlaces'],
             'submenu' => [
                 [
                     'text' => 'Enlaces (Servicios)',
@@ -341,7 +341,7 @@ return [
             'text' => 'Extensiones',
             'icon' => 'fas fa-fw fa-code-branch',
             //'can'  => 'tester',
-            'roles' => ['telecom',],
+            'roles' => ['telecom','telefonia'],
             'submenu' => [
                 [
                     'text' => 'Asignaciones',
@@ -451,7 +451,7 @@ return [
             'text' => 'Equipos Moviles',
             'icon' => 'fas fa-fw fa-mobile-alt',
             //'can'  => 'tester',
-            'roles' => ['movil',],
+            'roles' => ['movil'],
             'submenu' => [
                 [
                     'text' => 'Planes',

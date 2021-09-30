@@ -42,4 +42,14 @@ class Movil extends Model
         return $query->where('asignado','0');
     }
 
+    public function scopeMovil($query)
+    {
+
+        return $query->where('type_id','1');
+    }
+
+    public function scopeTablet($query)
+    {
+        return $query->where('type_id','2');
+    }
 }

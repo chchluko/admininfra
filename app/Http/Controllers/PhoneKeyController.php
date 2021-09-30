@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class PhoneKeyController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('role:telecom|telefonia');
+    }
     /**
      * Display a listing of the resource.
      *
