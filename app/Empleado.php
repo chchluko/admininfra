@@ -20,6 +20,11 @@ class Empleado extends Model
         return $this->NOMBRE . ' ' . $this->APELLIDOPATERNO . ' ' . $this->APELLIDOMATERNO;
     }
 
+    public function getNameAndNominaAttribute()
+    {
+    return $this->NOMBRE . ' ' . $this->APELLIDOPATERNO . ' ' . $this->APELLIDOMATERNO. ' (' . $this->NOMINA.')';
+    }
+
     public function scopeBusqueda($query, $request)
     {
         if (trim($request->nombre) != '') {

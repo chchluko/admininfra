@@ -19,8 +19,12 @@ class MovilsIndex extends Component
     public function getResultsProperty()
     {
         return Movil::whereHas('lineatelefonica', function ($query) {
-                $query->where('lineatelefonica', 'like', '%' . $this->search . '%');
-            })->orwhere('imei', 'like', '%' . $this->search . '%')->paginate(15);
+            $query->where('lineatelefonica', 'like', '%' . $this->search . '%');
+        })->orwhere('imei', 'like', '%' . $this->search . '%')->movil()->paginate(15);
+
+        if ($this->search = '') {
+            return Movil::movil()->paginate(15);
+        }
     }
 
     public function updatingSearch()

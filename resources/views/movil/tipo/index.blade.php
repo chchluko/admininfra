@@ -10,7 +10,7 @@
         <div class="card-header">
             <h3 class="card-title">Tipo de Equipo</h3>
         <div class="card-tools">
-            <a type="link" href="moviltipo/create" class="btn btn-tool"><i class="fas fa-plus"></i></a>
+            <a type="link" href="{{ route('moviltipo.create') }}" class="btn btn-tool"><i class="fas fa-plus"></i></a>
         </div>
         </div>
         <!-- /.card-header -->
@@ -19,6 +19,7 @@
             <table class="table">
                 <thead>
                     <th>Tipo</th>
+                    <th>Unidades</th>
                     <th>Ultima modificacion</th>
                     <th>Accion</th>
                 </thead>
@@ -26,6 +27,7 @@
                     @foreach ($resultado as $tipo)
                                 <tr>
                                     <td>{{ $tipo->tipo }}</td>
+                                    <td>{{ $tipo->movil->count() }}</td>
                                     <td>{{ \Carbon\Carbon::parse($tipo->updated_at)->format('d/m/Y H:i') }}</td>
                                     </td></td>
                                 </tr>
@@ -35,7 +37,7 @@
             </table>
         </div>
         <!-- /.card-body -->
-        <div class="card-footer clearfix">
+        <div class="clearfix card-footer">
             @include('partials.paginacion')
         </div>
       </div>

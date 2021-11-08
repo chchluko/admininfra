@@ -17,11 +17,11 @@ class CreateMovilPlansTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('plantype_id');
             $table->string('lineatelefonica');
-            $table->string('cuentaasignada');
+            $table->string('cuentaasignada')->nullable();
             $table->string('costo');
             $table->integer('plazo');
-            $table->string('marcacioncorta');
-            $table->string('serviciosadicionales');
+            $table->string('marcacioncorta')->nullable();
+            $table->string('serviciosadicionales')->nullable();
             $table->text('comentario')->nullable();
             $table->datetime('fechadeinicio');
             $table->datetime('fechadetermino');

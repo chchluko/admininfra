@@ -32,4 +32,14 @@ class AssignedMovil extends Model
         }
         return $query;
     }
+
+    public function getNOWAttribute()
+    {
+        return \Carbon\Carbon::now()->format('j').' de '.\Carbon\Carbon::now()->formatLocalized('%B').' del '.\Carbon\Carbon::now()->format('Y');
+    }
+
+    public function scopeActivo($query)
+    {
+        return $query->where('activo',1);
+    }
 }

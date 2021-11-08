@@ -28,8 +28,20 @@
                     @endif
                 </div>
             </div>
+            <div class="form-group row">@include('partials.form.status')</div>
+            @if ($movil->warehouse_id > 1)
+                <div class="form-group row">
+                    {!! Form::Label('warehouse_id', 'Almacen',['class' => 'col-sm-2 col-form-label']) !!}
+                    <div class="col-md-10">
+                        {!! Form::select('warehouse_id', $warehouses, null, ['class' => 'form-control']) !!}
+                        @if ($errors->has('warehouse_id'))
+                        <span class="error-message">{{ $errors->first('warehouse_id') }}</span>
+                        @endif
+                    </div>
+                </div>
+            @endif
                 <div class="form-group row">@include('partials.form.tipo')</div>
-                <div class="form-group row">@include('partials.form.status')</div>
+
                 <div class="form-group row">
                     <div class="col-6">
                         {!! Form::label('imei', 'IMEI') !!}

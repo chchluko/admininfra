@@ -10,7 +10,7 @@
         <div class="card-header">
             <h3 class="card-title">Hardware</h3>
         <div class="card-tools">
-            <a type="link" href="soporte/create" class="btn btn-tool"><i class="fas fa-plus"></i></a>
+            <a type="link" href="{{ route('soporte.create') }}" class="btn btn-tool"><i class="fas fa-plus"></i></a>
         </div>
         </div>
         <!-- /.card-header -->
@@ -46,7 +46,7 @@
                            <td> {{ $soporte->inventario }} (AF)<br>
                                 {{ $soporte->inventarioti }} (TI)</td>
                             <td>{{ \Carbon\Carbon::parse($soporte->updated_at)->format('d/m/Y') }}</td>
-                            <td class="text-right py-0 align-middle">
+                            <td class="py-0 text-right align-middle">
                                 <div class="btn-group btn-group-sm">
                                   <a href="{{ route('soporte.edit',$soporte->id ) }}" class="btn btn-default"><i class="fas fa-edit"></i></a>
                                   <a href="{{ route('soporte.show',$soporte->id ) }}" class="btn btn-default"><i class="fas fa-eye"></i></a>
@@ -59,7 +59,7 @@
             @endif
         </div>
         <!-- /.card-body -->
-        <div class="card-footer clearfix">
+        <div class="clearfix card-footer">
             @include('partials.paginacion')
         </div>
       </div>

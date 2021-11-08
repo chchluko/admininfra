@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Movil;
 use App\Empleado;
-use App\AssignedMovil;
 use App\MovilPlan;
-use Illuminate\Http\Request;
+use App\Warehouse;
+use App\AssignedMovil;
 
-use App\Exports\AssignedMovilsExport;
+use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\AssignedMovilsExport;
 
 
 class AssignedMovilController extends Controller
@@ -19,7 +20,7 @@ class AssignedMovilController extends Controller
 
     public function __construct()
     {
-        $this->filtros = ['0'=>'Seleccione un tipo','imei'=>'IMEI','lineatelefonica'=>'Teléfono','nomina'=>'Nomina'];
+        $this->filtros = ['0' => 'Seleccione un tipo', 'imei' => 'IMEI', 'lineatelefonica' => 'Teléfono', 'nomina' => 'Nomina'];
     }
     /**
      * Display a listing of the resource.
@@ -28,9 +29,7 @@ class AssignedMovilController extends Controller
      */
     public function index()
     {
-        $filtros = $this->filtros;
-        $resultado = AssignedMovil::where('comentario', '')->paginate(15);
-        return view('movil.asignacion.index', compact('resultado','filtros'));
+        return view('movil.asignacion.index');
     }
 
     /**
@@ -40,8 +39,8 @@ class AssignedMovilController extends Controller
      */
     public function create()
     {
-        $empleados = Empleado::select('NOMBRE', 'APELLIDOPATERNO', 'APELLIDOMATERNO', 'NOMINA')->active()->orderBy('NOMBRE')->get()->pluck('NOMINA', 'NOMINA')->prepend('Seleccione', 0);
-        $movils = Movil::asignada()->get()->pluck('imei', 'id')->prepend('Seleccione', 0);
+        $empleados = Empleado::select('NOMBRE', 'APELLIDOPATERNO', 'APELLIDOMATERNO', 'NOMINA')->active()->orderBy('NOMBRE')->get()->pluck('name_and_nomina', 'NOMINA')->prepend('Seleccione', 0);
+        $movils = Movil::libre()->get()->pluck('imei', 'id')->prepend('Seleccione', 0);
         return view('movil.asignacion.create', compact('empleados', 'movils'));
     }
 
@@ -92,9 +91,10 @@ class AssignedMovilController extends Controller
     public function edit(AssignedMovil $asignacionmovil)
     {
         $empleados = Empleado::select('NOMBRE', 'APELLIDOPATERNO', 'APELLIDOMATERNO', 'NOMINA')->active()
-        ->orderBy('NOMBRE')->get()->pluck('NOMINA', 'NOMINA')->prepend('Seleccione', 0);
-        $movils = Movil::get()->pluck('imei', 'id')->prepend('Seleccione', 0);
-       return view('movil.asignacion.edit', compact('empleados','movils','asignacionmovil'));
+            ->orderBy('NOMBRE')->get()->pluck('name_and_nomina', 'NOMINA')->prepend('Seleccione', 0);
+        $movils = Movil::select('imei','id')->asignado()->get()->pluck('imei', 'id')->prepend('Seleccione', 0);
+        $warehouses = Warehouse::whereNotIn('id',[1])->get()->pluck('name','id')->prepend('Seleccione',0);
+        return view('movil.asignacion.edit', compact('empleados', 'movils', 'asignacionmovil', 'warehouses'));
     }
 
     /**
@@ -106,7 +106,29 @@ class AssignedMovilController extends Controller
      */
     public function update(Request $request, AssignedMovil $asignacionmovil)
     {
-        $asignacionmovil->update($request->all());
+        $asignacionmovil->activo = 0;
+        $asignacionmovil->update();
+
+        $movil = Movil::find($asignacionmovil->movil_plan_id);
+        $movil->asignado = 0;
+        $movil->update();
+
+        $asignacion = new AssignedMovil();
+        $empleado = Empleado::find($request->nomina);
+        $movil = Movil::find($request->movil_id);
+        $asignacion->nomina = $empleado->NOMINA;
+        $asignacion->movil_id = $request->movil_id;
+        $asignacion->movil_plan_id = $movil->id;
+        $asignacion->comentario = $request->comentario;
+        $asignacion->condiciones = $request->condiciones;
+        $asignacion->nombre = $empleado->FullName;
+        $asignacion->area = $empleado->NOMBRE_AREA;
+        $asignacion->depto = $empleado->NOMBRE_DEPARTAMENTO;
+        $asignacion->puesto = $empleado->NOMBRE_PUESTO;
+        $asignacion->save();
+        $movil->asignado = 1;
+        $movil->update();
+
         return redirect('asignacionmovil')->with('info', "Asignación Actualizada correctamente");
     }
 
@@ -116,9 +138,16 @@ class AssignedMovilController extends Controller
      * @param  \App\AssignedMovil  $assignedMovil
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AssignedMovil $assignedMovil)
+    public function destroy(AssignedMovil $asignacionmovil)
     {
-        //
+        $asignacionmovil->activo = 0;
+        $asignacionmovil->update();
+
+        $movil = Movil::find($asignacionmovil->movil_plan_id);
+        $movil->asignado = 0;
+        $movil->status_id = 1;
+        $movil->warehouse_id = 4;
+        $movil->update();
     }
 
     public function searchAssignedMovil(Request $request)
@@ -153,25 +182,34 @@ class AssignedMovilController extends Controller
         }
 
         if ($resultado->count() > 0) {
-            return view('movil.asignacion.index', compact('resultado'),compact('filtros'));
+            return view('movil.asignacion.index', compact('resultado'), compact('filtros'));
         }
         return redirect()->route('asignacionmovil.index')->with('info', "No hay resultados que coincidan")->withInput();
     }
 
-    public function responsiva(AssignedMovil $asignacionmovil){
-
+    public function responsiva(AssignedMovil $asignacionmovil)
+    {
         $view =  \View::make('movil.pdf.responsiva', compact('asignacionmovil'))->render();
         $pdf = \App::make('dompdf.wrapper');
-
         $pdf->loadHTML($view);
-
         $pdf->setPaper('letter', 'portrait');
         return $pdf->download('Responsiva.pdf');
         // return $pdf->stream();
     }
 
+    public function liberacion(AssignedMovil $asignacionmovil)
+    {
+
+        $view =  \View::make('movil.pdf.liberacion', compact('asignacionmovil'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        $pdf->setPaper('letter', 'portrait');
+        return $pdf->download('liberacion.pdf');
+        // return $pdf->stream();
+    }
+
     public function reportAssignedMovils()
     {
-         return Excel::download(new AssignedMovilsExport, 'asignacionmovil.xlsx');
+        return Excel::download(new AssignedMovilsExport, 'asignacionmovil.xlsx');
     }
 }

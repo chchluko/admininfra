@@ -18,7 +18,6 @@
 @include('partials.alert')
     <div class="card-body">
     {!! Form::model($asignacionmovil, ['route'=>['asignacionmovil.update',$asignacionmovil],'method'=>'PUT']) !!}
-            @csrf
                 <div class="form-group row">@include('partials.form.empleado')</div>
                 <div class="form-group row">
                     {!! Form::Label('movil_id', 'Equipo Telefonico',['class' => 'col-sm-2 col-form-label']) !!}
@@ -30,12 +29,14 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="condiciones">Condiciones de Entrega</label>
+                    {!! Form::Label('condiciones', 'Condiciones de Entrega',['class' => 'col-sm-2 col-form-label']) !!}
+                    <div class="col-md-10">
                     <textarea class="form-control {{ $errors->has('condiciones') ? 'field-error' : '' }}" rows="3"
                         name="condiciones" placeholder="Opcional">{{ old('condiciones') }}</textarea>
                     @if ($errors->has('condiciones'))
                         <span class="error-message">{{ $errors->first('condiciones') }}</span>
                     @endif
+                    </div>
                 </div>
                 <div class="form-group row">@include('partials.form.comentario')</div>
     </div>
@@ -43,10 +44,13 @@
     <div class="clearfix card-footer">
         <button type="submit" class="btn btn-info">Guardar</button>
         <a type="link" href="{{ url()->previous() }}" class="float-right btn btn-default">Cancelar</a>
+        {!! Form::open( ['route'=>['asignacionmovil.destroy',$asignacionmovil],'method'=>'DELETE']) !!}
+            <button type="submit" class="float-right btn btn-warning">Liberar</button>
+        {!! Form::close() !!}
     </div>
 {!! Form::close() !!}
   </div>
-
+{{-- @livewire('movil.movils-unlock',['movil'=>$asignacionmovil->movil_id]) --}}
 @stop
 
 @section('css')

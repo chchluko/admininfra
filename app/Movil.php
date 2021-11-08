@@ -37,14 +37,24 @@ class Movil extends Model
         return $query;
     }
 
-    public function scopeAsignada($query)
+    public function scopeActivo($query)
     {
-        return $query->where('asignado','0');
+        return $query->where('activo',1);
+    }
+
+
+    public function scopeLibre($query)
+    {
+        return $query->where('asignado',0)->where('status_id',1);
+    }
+
+    public function scopeAsignado($query)
+    {
+        return $query->where('asignado',1)->where('status_id',2);
     }
 
     public function scopeMovil($query)
     {
-
         return $query->where('type_id','1');
     }
 
@@ -52,4 +62,14 @@ class Movil extends Model
     {
         return $query->where('type_id','2');
     }
+
+  /*public function scopeDispositivo($query)
+    {
+        if (auth()->user()->hasRole('movil')) {
+            return $query->where('type_id',1);
+        }
+        if (auth()->user()->hasRole('operacionmovil')) {
+            return $query->where('type_id',2);
+        }
+    }*/
 }

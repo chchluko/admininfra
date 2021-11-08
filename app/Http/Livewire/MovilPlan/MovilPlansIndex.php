@@ -21,6 +21,10 @@ class MovilPlansIndex extends Component
         return MovilPlan::whereHas('tipo', function ($query) {
             $query->where('tipo', 'like', '%' . $this->search . '%');
         })->orwhere('lineatelefonica', 'like', '%' . $this->search . '%')->paginate(15);
+
+        if ($this->search = '') {
+            return MovilPlan::paginate(15);
+        }
     }
 
     public function updatingSearch()

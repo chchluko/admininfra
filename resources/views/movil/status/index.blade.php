@@ -19,6 +19,7 @@
             <table class="table">
                 <thead>
                     <th>Status</th>
+                    <th>Unidades</th>
                     <th>Ultima modificacion</th>
                     <th>Accion</th>
                 </thead>
@@ -26,6 +27,7 @@
                     @foreach ($resultado as $status)
                                 <tr>
                                     <td>{{ $status->status }}</td>
+                                    <td>{{ $status->movil->count() }}</td>
                                     <td>{{ \Carbon\Carbon::parse($status->updated_at)->format('d/m/Y H:i') }}</td>
                                     <td></td>
                                 </tr>
@@ -34,7 +36,7 @@
             </table>
         </div>
         <!-- /.card-body -->
-        <div class="card-footer clearfix">
+        <div class="clearfix card-footer">
             @include('partials.paginacion')
         </div>
       </div>

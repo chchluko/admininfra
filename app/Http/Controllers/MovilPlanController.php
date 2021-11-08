@@ -23,9 +23,7 @@ class MovilPlanController extends Controller
      */
     public function index()
     {
-        $filtros = $this->filtros;
-        $resultado = MovilPlan::where('comentario','3')->paginate(15);
-        return view('movil.plan.index',compact('resultado','filtros'));
+        return view('movil.plan.index');
     }
 
     /**

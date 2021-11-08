@@ -274,7 +274,7 @@ return [
             'text' => 'Correos',
             'url'  => 'emails',
             'icon' => 'fas fa-fw fa-at',
-            'roles' => ['gerencia','direccion','operacion'],
+            'roles' => ['gerencia', 'direccion', 'operacion'],
         ],
         [
             'text' => 'Tracking emails',
@@ -286,7 +286,7 @@ return [
             'text' => 'Claves Telefonicas',
             'icon' => 'fas fa-fw fa-phone',
             //'can'  => 'tester',
-            'roles' => ['telecom','telefonia'],
+            'roles' => ['telecom', 'telefonia'],
             'submenu' => [
                 [
                     'text' => 'Asignaciones',
@@ -306,7 +306,7 @@ return [
             'text'    => 'Enlaces & Lineas',
             'icon'    => 'fas fa-fw fa-link',
             //'can'  => 'tester',
-            'roles' => ['telecom','enlaces'],
+            'roles' => ['telecom', 'enlaces'],
             'submenu' => [
                 [
                     'text' => 'Enlaces (Servicios)',
@@ -341,7 +341,7 @@ return [
             'text' => 'Extensiones',
             'icon' => 'fas fa-fw fa-code-branch',
             //'can'  => 'tester',
-            'roles' => ['telecom','telefonia'],
+            'roles' => ['telecom', 'telefonia'],
             'submenu' => [
                 [
                     'text' => 'Asignaciones',
@@ -362,12 +362,6 @@ return [
             //'can'  => 'tester',
             'roles' => ['datacenter',],
             'submenu' => [
-                [
-                    'text' => 'Plataformas',
-                    'url'  => 'plataformas',
-                    'icon' => 'fas fa-fw fa-server',
-                    'active' => ['plataformas'],
-                ],
                 [
                     'text' => 'Catalogos',
                     'icon' => 'fas fa-fw fa-folder',
@@ -392,7 +386,65 @@ return [
                             'url'  => 'plataformasstatus',
                             'active' => ['plataformasstatus*'],
                         ],
+                        [
+                            'text' => 'Datacenter',
+                            'url'  => 'datacenters',
+                            'active' => ['datacenters*'],
+                        ],
+                        [
+                            'text' => 'Sistemas Operativos',
+                            'url'  => 'operatings',
+                            'active' => ['operatings*'],
+                        ],
                     ],
+                ],
+                [
+                    'text' => 'Servidores',
+                    'url'  => 'servidores',
+                    'icon' => 'fas fa-fw fa-server',
+                    'active' => ['servidores*'],
+                ],
+                [
+                    'text' => 'Routers',
+                    'url'  => 'routers',
+                    'icon' => 'fas fa-fw fa-route',
+                    'active' => ['routers*'],
+                ],
+                [
+                    'text' => 'Switchs',
+                    'url'  => 'switchs',
+                    'icon' => 'fas fa-fw fa-toggle-on',
+                    'active' => ['switchs*'],
+                ],
+                [
+                    'text' => 'Firewalls',
+                    'url'  => 'firewalls',
+                    'icon' => 'fas fa-fw fa-shield-alt',
+                    'active' => ['firewalls*'],
+                ],
+                [
+                    'text' => 'CCTV',
+                    'url'  => 'cctv',
+                    'icon' => 'fas fa-fw fa-video',
+                    'active' => ['cctv*'],
+                ],
+                [
+                    'text' => 'Control de Acceso',
+                    'url'  => 'biometricos',
+                    'icon' => 'fas fa-fw fa-fingerprint',
+                    'active' => ['biometricos*'],
+                ],
+                [
+                    'text' => 'Aire Acondicionado',
+                    'url'  => 'doblea',
+                    'icon' => 'fas fa-fw fa-wind',
+                    'active' => ['doblea*'],
+                ],
+                [
+                    'text' => 'Pantallas',
+                    'url'  => 'screens',
+                    'icon' => 'fas fa-fw fa-desktop',
+                    'active' => ['screens*'],
                 ],
             ],
         ],
@@ -454,24 +506,6 @@ return [
             'roles' => ['movil'],
             'submenu' => [
                 [
-                    'text' => 'Planes',
-                    'url'  => 'movilplan',
-                    'icon' => 'fas fa-fw fa-wifi',
-                    'active' => ['movilplan*'],
-                ],
-                [
-                    'text' => 'Equipos',
-                    'url'  => 'movil',
-                    'icon' => 'fas fa-fw fa-mobile-alt',
-                    'active' => ['movil'],
-                ],
-                [
-                    'text' => 'Asignaciones',
-                    'url'  => 'asignacionmovil',
-                    'icon' => 'fas fa-fw fa-user-check',
-                    'active' => ['asignacionmovil*'],
-                ],
-                [
                     'text' => 'Catalogos',
                     'icon' => 'fas fa-fw fa-folder',
                     'submenu' => [
@@ -495,7 +529,36 @@ return [
                             'url'  => 'plantipo',
                             'active' => ['plantipo*'],
                         ],
+                        [
+                            'text' => 'Almacen',
+                            'url'  => 'warehouse',
+                            'active' => ['warehouse*'],
+                        ],
                     ],
+                ],
+                [
+                    'text' => 'Planes',
+                    'url'  => 'movilplan',
+                    'icon' => 'fas fa-fw fa-wifi',
+                    'active' => ['movilplan*'],
+                ],
+                [
+                    'text' => 'Equipos celulares',
+                    'url'  => 'movil',
+                    'icon' => 'fas fa-fw fa-mobile-alt',
+                    'active' => ['movil'],
+                ],
+                [
+                    'text' => 'Tablets',
+                    'url'  => 'tablet',
+                    'icon' => 'fas fa-fw fa-mobile-alt',
+                    'active' => ['tablet'],
+                ],
+                [
+                    'text' => 'Asignaciones ',
+                    'url'  => 'asignacionmovil',
+                    'icon' => 'fas fa-fw fa-user-check',
+                    'active' => ['asignacionmovil*'],
                 ],
             ],
         ],

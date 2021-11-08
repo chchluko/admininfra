@@ -21,7 +21,7 @@ class CreateMovilsTable extends Migration
             $table->unsignedBigInteger('type_id');
             $table->unsignedBigInteger('movil_plan_id');
             $table->string('modelo');
-            $table->string('noserie');
+            $table->string('noserie')->nullable();
             $table->text('comentario')->nullable();
             $table->boolean('activo')->default(1);
             $table->boolean('asignado')->default(0);

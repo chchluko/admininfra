@@ -90,12 +90,13 @@
                         <span class="error-message">{{ $errors->first('cuentaasignada') }}</span>
                       @endif
                 </div>
-                @include('partials.form.comentario')
+                <div class="form-group row">
+                @include('partials.form.comentario')</div>
     </div>
     <!-- /.card-body -->
-    <div class="card-footer clearfix">
+    <div class="clearfix card-footer">
         <button type="submit" class="btn btn-info">Guardar</button>
-        <a type="link" href="{{ url()->previous() }}" class="btn btn-default float-right">Cancelar</a>
+        <a type="link" href="{{ url()->previous() }}" class="float-right btn btn-default">Cancelar</a>
     </div>
 </form>
   </div>

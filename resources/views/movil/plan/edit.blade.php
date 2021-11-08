@@ -54,10 +54,10 @@
             </div>
             <div class="col-6">
                 {!! Form::label('fechadetermino', 'Fecha de Termino') !!}
-{!! Form::date('fechadetermino',null, ['class'=>'form-control']) !!}
-@error('fechadetermino')
-<span class="error-message">{{ $message }}</span>
-@enderror
+                {!! Form::date('fechadetermino',null, ['class'=>'form-control']) !!}
+                @error('fechadetermino')
+                <span class="error-message">{{ $message }}</span>
+                @enderror
             </div>
         </div>
         <div class="form-group row">
@@ -77,20 +77,27 @@
             </div>
         </div>
         <div class="form-group row">
-            {!! Form::label('serviciosadicionales', 'Servicios adicionales') !!}
-            {!! Form::text('serviciosadicionales', null, ['class'=>'form-control','placeholder'=>'Introduzca texto']) !!}
+            {!! Form::label('serviciosadicionales', 'Servicios adicionales',['class'=>'col-sm-2 col-form-label']) !!}
+            <div class="col-md-10">
+            {!! Form::text('serviciosadicionales', null, ['class'=>'form-control','placeholder'=>'Introduzca texto'])
+            !!}
             @error('serviciosadicionales')
             <span class="error-message">{{ $message }}</span>
             @enderror
+            </div>
         </div>
         <div class="form-group row">
-            {!! Form::label('cuentaasignada', 'Cuenta Asignada') !!}
+            {!! Form::label('cuentaasignada', 'Cuenta Asignada',['class'=>'col-sm-2 col-form-label']) !!}
+            <div class="col-md-10">
             {!! Form::text('cuentaasignada', null, ['class'=>'form-control','placeholder'=>'Introduzca texto']) !!}
             @error('cuentaasignada')
             <span class="error-message">{{ $message }}</span>
             @enderror
+            </div>
         </div>
-        @include('partials.form.comentario')
+        <div class="form-group row">
+            @include('partials.form.comentario')
+        </div>
     </div>
     <!-- /.card-body -->
     <div class="clearfix card-footer">

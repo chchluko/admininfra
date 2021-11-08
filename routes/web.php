@@ -81,7 +81,16 @@ Route::resource('plataformastipo', PlatformTypeController::class)->middleware('a
 Route::resource('plataformasstatus', PlatformStatusController::class)->middleware('auth');
 Route::resource('plataformasprovedor', PlatformProviderController::class)->middleware('auth');
 Route::resource('plataformasmarca', PlatformMarkController::class)->middleware('auth');
-Route::resource('plataformas', PlatformController::class)->middleware('auth');
+Route::resource('servidores', ServerController::class)->middleware('auth');
+Route::resource('switchs', SwichController::class)->middleware('auth');
+Route::resource('routers', RouterController::class)->middleware('auth');
+Route::resource('biometricos', BiometricController::class)->middleware('auth');
+Route::resource('cctv', CctvController::class)->middleware('auth');
+Route::resource('doblea', DobleaController::class)->middleware('auth');
+Route::resource('screens', ScreenController::class)->middleware('auth');
+Route::resource('firewalls', FirewallController::class)->middleware('auth');
+Route::resource('operatings', OperatingSystemController::class)->middleware('auth');
+Route::resource('datacenters', DatacenterController::class)->middleware('auth');
 Route::get('searchplataforma', 'PlatformController@searchPlatform')->name('buscarplataforma')->middleware('auth');
 
 Route::resource('soportetipo', SupportTypeController::class)->middleware('auth');
@@ -100,12 +109,15 @@ Route::resource('movilstatus', MovilStatusController::class)->middleware('auth')
 Route::resource('movilplan', MovilPlanController::class)->middleware('auth');
 Route::resource('movilmarca', MovilMarkController::class)->middleware('auth');
 Route::resource('movil', MovilController::class)->middleware('auth');
+Route::resource('tablet', TabletController::class)->middleware('auth');
 Route::resource('asignacionmovil', AssignedMovilController::class)->middleware('auth');
 Route::resource('plantipo', PlanTypeController::class)->middleware('auth');
+Route::resource('warehouse', WarehouseController::class)->middleware('auth');
 Route::get('searchmovilasig', 'AssignedMovilController@searchAssignedMovil')->name('buscarmovilasig')->middleware('auth');
 Route::get('searchmovil', 'MovilController@searchMovil')->name('buscarmovil')->middleware('auth');
 Route::get('searchplan', 'MovilPlanController@searchPlan')->name('buscarplan')->middleware('auth');
 Route::get('resposivamovil/{asignacionmovil}', 'AssignedMovilController@responsiva')->name('responsiva_movil')->middleware('auth');
+Route::get('liberacionmovil/{asignacionmovil}', 'AssignedMovilController@liberacion')->name('liberacion_movil')->middleware('auth');
 Route::get('reportassignedmovil', 'AssignedMovilController@reportAssignedMovils')->name('assignedmovilreport')->middleware('auth');
 
 Route::name('admin')->resource('roles', Admin\RoleController::class)->names('roles');

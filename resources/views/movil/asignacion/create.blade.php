@@ -30,12 +30,14 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="condiciones">Condiciones de Entrega</label>
+                    {!! Form::Label('condiciones', 'Condiciones de Entrega',['class' => 'col-sm-2 col-form-label']) !!}
+                    <div class="col-md-10">
                     <textarea class="form-control {{ $errors->has('condiciones') ? 'field-error' : '' }}" rows="3"
                         name="condiciones" placeholder="Opcional">{{ old('condiciones') }}</textarea>
                     @if ($errors->has('condiciones'))
                         <span class="error-message">{{ $errors->first('condiciones') }}</span>
                     @endif
+                    </div>
                 </div>
                 <div class="form-group row">@include('partials.form.comentario')</div>
     </div>
