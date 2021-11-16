@@ -19,6 +19,11 @@ class MovilPlan extends Model
         return $this->belongsTo('App\PlanType','plantype_id','id');
     }
 
+    public function asignacion()
+    {
+        return $this->hasMany(AssignedMovil::class, 'movil_plan_id', 'id');
+    }
+
     public function scopeBuscarpor($query, $tipo, $nombre)
     {
         if (($tipo) && ($nombre)) {
@@ -40,5 +45,10 @@ class MovilPlan extends Model
     public function getFechadeterminoAttribute($value)
     {
         return \Carbon\Carbon::parse($value)->format('Y-m-d');
+    }
+
+    public function resource()
+    {
+        return $this->morphMany('App\Resource', 'resourceable');
     }
 }

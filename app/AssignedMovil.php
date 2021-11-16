@@ -17,7 +17,7 @@ class AssignedMovil extends Model
 
     public function lineatelefonica()
     {
-        return $this->hasOne('App\MovilPlan','id','movil_plan_id');
+        return $this->belongsTo('App\MovilPlan','movil_plan_id','id');
     }
 
     public function nomina()
@@ -41,5 +41,17 @@ class AssignedMovil extends Model
     public function scopeActivo($query)
     {
         return $query->where('activo',1);
+    }
+
+    public function resource()
+    {
+        return $this->morphMany('App\Resource', 'resourceable');
+    }
+
+    public function scopeHistory($query, $activo)
+    {
+        if ($activo) {
+            return $query->where('activo', $activo);
+        }
     }
 }

@@ -66,7 +66,9 @@ class AssignedMovilController extends Controller
         $asignacion->depto = $empleado->NOMBRE_DEPARTAMENTO;
         $asignacion->puesto = $empleado->NOMBRE_PUESTO;
         $asignacion->save();
+        $movil->status_id = 2;
         $movil->asignado = 1;
+        $movil->warehouse_id = 1;
         $movil->update();
         return redirect('asignacionmovil')->with('info', "Asignación guardada correctamente");
     }
@@ -90,11 +92,15 @@ class AssignedMovilController extends Controller
      */
     public function edit(AssignedMovil $asignacionmovil)
     {
-        $empleados = Empleado::select('NOMBRE', 'APELLIDOPATERNO', 'APELLIDOMATERNO', 'NOMINA')->active()
-            ->orderBy('NOMBRE')->get()->pluck('name_and_nomina', 'NOMINA')->prepend('Seleccione', 0);
-        $movils = Movil::select('imei','id')->asignado()->get()->pluck('imei', 'id')->prepend('Seleccione', 0);
-        $warehouses = Warehouse::whereNotIn('id',[1])->get()->pluck('name','id')->prepend('Seleccione',0);
-        return view('movil.asignacion.edit', compact('empleados', 'movils', 'asignacionmovil', 'warehouses'));
+        $empleados = Empleado::select('NOMBRE', 'APELLIDOPATERNO', 'APELLIDOMATERNO', 'NOMINA')->where('NOMINA',$asignacionmovil->nomina)->get()->pluck('name_and_nomina', 'NOMINA');
+        if ($asignacionmovil->activo == 0) {
+            $movils = Movil::where('id',$asignacionmovil->movil_id)->get()->pluck('imei', 'id');
+        } else {
+         /* $empleados = Empleado::select('NOMBRE', 'APELLIDOPATERNO', 'APELLIDOMATERNO', 'NOMINA')
+            ->active()->orderBy('NOMBRE')->get()->pluck('name_and_nomina', 'NOMINA')->prepend('Seleccione', 0);*/
+            $movils = Movil::select('imei', 'id')->libre()->get()->pluck('imei', 'id');
+        }
+        return view('movil.asignacion.edit', compact('empleados', 'movils', 'asignacionmovil'));
     }
 
     /**
@@ -106,29 +112,35 @@ class AssignedMovilController extends Controller
      */
     public function update(Request $request, AssignedMovil $asignacionmovil)
     {
-        $asignacionmovil->activo = 0;
-        $asignacionmovil->update();
+        if ($request->movil_id != $asignacionmovil->movil_id) {
 
-        $movil = Movil::find($asignacionmovil->movil_plan_id);
-        $movil->asignado = 0;
-        $movil->update();
+            $asignacionmovil->activo = 0;
+            $asignacionmovil->update();
 
-        $asignacion = new AssignedMovil();
-        $empleado = Empleado::find($request->nomina);
-        $movil = Movil::find($request->movil_id);
-        $asignacion->nomina = $empleado->NOMINA;
-        $asignacion->movil_id = $request->movil_id;
-        $asignacion->movil_plan_id = $movil->id;
-        $asignacion->comentario = $request->comentario;
-        $asignacion->condiciones = $request->condiciones;
-        $asignacion->nombre = $empleado->FullName;
-        $asignacion->area = $empleado->NOMBRE_AREA;
-        $asignacion->depto = $empleado->NOMBRE_DEPARTAMENTO;
-        $asignacion->puesto = $empleado->NOMBRE_PUESTO;
-        $asignacion->save();
-        $movil->asignado = 1;
-        $movil->update();
+            $movillegacy = Movil::find($asignacionmovil->movil_id);
+            $movillegacy->status_id = 1;
+            $movillegacy->warehouse_id = 4;
+            $movillegacy->asignado = 0;
+            $movillegacy->update();
 
+            $asignacion = new AssignedMovil();
+            $empleado = Empleado::find($request->nomina);
+            $movil = Movil::find($request->movil_id);
+            $asignacion->nomina = $empleado->NOMINA;
+            $asignacion->movil_id = $request->movil_id;
+            $asignacion->movil_plan_id = $movil->movil_plan_id;
+            $asignacion->comentario = $request->comentario;
+            $asignacion->condiciones = $request->condiciones;
+            $asignacion->nombre = $empleado->FullName;
+            $asignacion->area = $empleado->NOMBRE_AREA;
+            $asignacion->depto = $empleado->NOMBRE_DEPARTAMENTO;
+            $asignacion->puesto = $empleado->NOMBRE_PUESTO;
+            $asignacion->save();
+            $movil->status_id = 2;
+            $movil->asignado = 1;
+            $movil->warehouse_id = 1;
+            $movil->update();
+        }
         return redirect('asignacionmovil')->with('info', "Asignación Actualizada correctamente");
     }
 
@@ -148,6 +160,8 @@ class AssignedMovilController extends Controller
         $movil->status_id = 1;
         $movil->warehouse_id = 4;
         $movil->update();
+
+        return redirect('asignacionmovil')->with('info', "Equipo liberado correctamente");
     }
 
     public function searchAssignedMovil(Request $request)

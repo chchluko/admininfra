@@ -10,6 +10,7 @@ class MovilsIndex extends Component
 {
     use WithPagination;
     public $search;
+    public $tipo = [];
 
     public function render()
     {
@@ -20,10 +21,10 @@ class MovilsIndex extends Component
     {
         return Movil::whereHas('lineatelefonica', function ($query) {
             $query->where('lineatelefonica', 'like', '%' . $this->search . '%');
-        })->orwhere('imei', 'like', '%' . $this->search . '%')->movil()->paginate(15);
+        })->orwhere('imei', 'like', '%' . $this->search . '%')->tipo($this->tipo)->paginate(15);
 
         if ($this->search = '') {
-            return Movil::movil()->paginate(15);
+            return Movil::all()->tipo($this->tipo)->paginate(15);
         }
     }
 

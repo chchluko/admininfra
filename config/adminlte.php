@@ -520,11 +520,6 @@ return [
                             'active' => ['movilmarca*'],
                         ],
                         [
-                            'text' => 'Status',
-                            'url'  => 'movilstatus',
-                            'active' => ['movilstatus*'],
-                        ],
-                        [
                             'text' => 'Tipos de Planes',
                             'url'  => 'plantipo',
                             'active' => ['plantipo*'],
@@ -537,13 +532,13 @@ return [
                     ],
                 ],
                 [
-                    'text' => 'Planes',
+                    'text' => 'Lineas',
                     'url'  => 'movilplan',
-                    'icon' => 'fas fa-fw fa-wifi',
+                    'icon' => 'fas fa-fw fa-phone',
                     'active' => ['movilplan*'],
                 ],
                 [
-                    'text' => 'Equipos celulares',
+                    'text' => 'Equipos moviles',
                     'url'  => 'movil',
                     'icon' => 'fas fa-fw fa-mobile-alt',
                     'active' => ['movil'],
@@ -555,10 +550,16 @@ return [
                     'active' => ['tablet'],
                 ],
                 [
-                    'text' => 'Asignaciones ',
+                    'text' => 'Asignaciones',
                     'url'  => 'asignacionmovil',
                     'icon' => 'fas fa-fw fa-user-check',
                     'active' => ['asignacionmovil*'],
+                ],
+                [
+                    'text' => 'Status',
+                    'url'  => 'movilstatus',
+                    'icon' => 'fas fa-fw fa-clipboard-list',
+                    'active' => ['movilstatus*'],
                 ],
             ],
         ],

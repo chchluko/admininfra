@@ -107,6 +107,8 @@
     {!! Form::close() !!}
 </div>
 
+@livewire('movil-plan.resources', ['movilplan' => $movilplan], key('resources'.$movilplan->id))
+
 @stop
 
 @section('css')

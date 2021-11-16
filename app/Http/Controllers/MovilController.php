@@ -17,7 +17,7 @@ class MovilController extends Controller
 
     public function __construct()
     {
-        $this->filtros = ['0'=>'Seleccione un tipo','imei'=>'IMEI','noserie'=>'Numero de Serie','modelo'=>'Modelo'];
+        $this->filtros = ['0' => 'Seleccione un tipo', 'imei' => 'IMEI', 'noserie' => 'Numero de Serie', 'modelo' => 'Modelo'];
     }
 
     /**
@@ -37,12 +37,12 @@ class MovilController extends Controller
      */
     public function create()
     {
-        $tipos = MovilType::get()->pluck('tipo','id')->prepend('Seleccione',0);
-        $status = MovilStatus::get()->pluck('status','id')->prepend('Seleccione',0);
-        $marcas = MovilMark::get()->pluck('marca','id')->prepend('Seleccione',0);
-        $warehouses = Warehouse::whereNotIn('id',[1])->get()->pluck('name','id')->prepend('Seleccione',0);
-        $lineas = MovilPlan::asignada()->get()->pluck('lineatelefonica','id')->prepend('Seleccione',0);
-        return view('movil.create',compact('tipos','status','marcas','lineas','warehouses'));
+        $tipos = MovilType::get()->pluck('tipo', 'id')->prepend('Seleccione', 0);
+        $status = MovilStatus::get()->pluck('status', 'id')->prepend('Seleccione', 0);
+        $marcas = MovilMark::get()->pluck('marca', 'id')->prepend('Seleccione', 0);
+        $warehouses = Warehouse::whereNotIn('id', [1])->get()->pluck('name', 'id')->prepend('Seleccione', 0);
+        $lineas = MovilPlan::asignada()->get()->pluck('lineatelefonica', 'id')->prepend('Seleccione', 0);
+        return view('movil.create', compact('tipos', 'status', 'marcas', 'lineas', 'warehouses'));
     }
 
     /**
@@ -81,18 +81,18 @@ class MovilController extends Controller
      */
     public function edit(Movil $movil)
     {
-        $tipos = MovilType::get()->pluck('tipo','id')->prepend('Seleccione',0);
-        $status = MovilStatus::get()->pluck('status','id');
+        $tipos = MovilType::get()->pluck('tipo', 'id')->prepend('Seleccione', 0);
+        $status = MovilStatus::get()->pluck('status', 'id');
         if ($movil->status_id == 1) {  // Stock
             unset($status['2']);
         }
         if ($movil->status_id == 2) { // Asignado
             unset($status['1']);
         }
-        $marcas = MovilMark::get()->pluck('marca','id')->prepend('Seleccione',0);
-        $lineas = MovilPlan::get()->pluck('lineatelefonica','id')->prepend('Seleccione',0);
-        $warehouses = Warehouse::whereNotIn('id',[1])->get()->pluck('name','id');
-        return view('movil.edit',compact('movil','tipos','status','marcas','lineas','warehouses'));
+        $marcas = MovilMark::get()->pluck('marca', 'id')->prepend('Seleccione', 0);
+        $lineas = MovilPlan::where('id', $movil->movil_plan_id)->get()->pluck('lineatelefonica', 'id');
+        $warehouses = Warehouse::whereNotIn('id', [1])->get()->pluck('name', 'id');
+        return view('movil.edit', compact('movil', 'tipos', 'status', 'marcas', 'lineas', 'warehouses'));
     }
 
     /**
@@ -108,8 +108,12 @@ class MovilController extends Controller
             $movil->asignado = 0;
             $movil->activo = 0;
 
-            if ($movil->status_id == 2){
-                $assignedmovil = AssignedMovil::where('movil_id',$movil->id)->activo()->first();
+            $plan = MovilPlan::find($movil->movil_plan_id);
+            $plan->asignado = 0;
+            $plan->update();
+
+            if ($movil->status_id == 2) {
+                $assignedmovil = AssignedMovil::where('movil_id', $movil->id)->activo()->first();
                 $assignedmovil->activo = 0;
                 $assignedmovil->update();
             }
@@ -117,7 +121,13 @@ class MovilController extends Controller
 
         $movil->fill($request->all());
         $movil->update();
-        return redirect('movil');
+
+        if ($movil->type_id == 1) {
+            return redirect('movil');
+        }
+        if($movil->type_id == 2) {
+            return redirect('tablet');
+        }
     }
 
     public function searchMovil(Request $request)
@@ -138,7 +148,7 @@ class MovilController extends Controller
         $resultado = Movil::buscarpor($request->tipo, $request->nombre)->paginate(15);
 
         if ($resultado->count() > 0) {
-            return view('movil.index', compact('resultado','filtros'));
+            return view('movil.index', compact('resultado', 'filtros'));
         }
         return redirect()->route('movil.index')->with('info', "No hay resultados que coincidan")->withInput();
     }

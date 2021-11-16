@@ -16,7 +16,8 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            @livewire('assigned-movil.assigned-movils-index')
+         {{--   @livewire('assigned-movil.assigned-movils-index')--}}
+             @livewire('movil.movil-search')
             @include('partials.flash')
         </div>
         <!-- /.card-body -->

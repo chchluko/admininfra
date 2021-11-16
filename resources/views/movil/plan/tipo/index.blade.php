@@ -19,6 +19,7 @@
             <table class="table">
                 <thead>
                     <th>Tipo</th>
+                    <th>Unidades</th>
                     <th>Ultima modificacion</th>
                     <th>Accion</th>
                 </thead>
@@ -26,6 +27,7 @@
                     @foreach ($resultado as $tipo)
                                 <tr>
                                     <td>{{ $tipo->tipo }}</td>
+                                    <td>{{ $tipo->planes->count() }}</td>
                                     <td>{{ \Carbon\Carbon::parse($tipo->updated_at)->format('d/m/Y H:i') }}</td>
                                     </td></td>
                                 </tr>
@@ -35,7 +37,7 @@
             </table>
         </div>
         <!-- /.card-body -->
-        <div class="card-footer clearfix">
+        <div class="clearfix card-footer">
             @include('partials.paginacion')
         </div>
       </div>

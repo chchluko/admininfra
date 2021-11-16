@@ -66,7 +66,7 @@
     </div>
 {!! Form::close() !!}
   </div>
-
+  @livewire('movil.resources', ['movil' => $movil], key('resources'.$movil->id))
 @stop
 
 @section('css')

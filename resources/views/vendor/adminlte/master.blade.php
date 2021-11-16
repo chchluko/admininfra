@@ -103,7 +103,7 @@
 
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
-
+    <script defer src="https://unpkg.com/alpinejs@3.5.0/dist/cdn.min.js"></script>
 </body>
 
 </html>
