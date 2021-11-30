@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Platform;
 
 use App\Server;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -19,6 +20,10 @@ class ServersIndex extends Component
     public function getResultsProperty()
     {
         return Server::where('ip', 'like', '%' . $this->search . '%')->paginate(15);
+
+        if ($this->search = '') {
+            return Server::whereBetween('vigsoporte', [Carbon::now(), Carbon::now()->addMonths(4)])->where('status_id', 1)->paginate(15);
+        }
     }
 
     public function updatingSearch()
