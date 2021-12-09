@@ -58,12 +58,22 @@
                   </div>
     </div>
     <!-- /.card-body -->
-    <div class="card-footer clearfix">
+    <div class="clearfix card-footer">
         <button type="submit" class="btn btn-info">Actualizar</button>
-        <a type="link" href="{{ url()->previous() }}" class="btn btn-default float-right">Cancelar</a>
+        <a type="link" href="{{ url()->previous() }}" class="float-right btn btn-default">Cancelar</a>
 
     </div>    </form>
   </div>
+
+@can('view password vip')
+      <div class="card card-cyan">
+          <div class="card-header">Tipo de cuenta Asignada</div>
+      <div class="card-body">
+         @livewire('email.email-type', ['email' => $email], key('email-type'.$email->id))
+      </div>
+  </div>
+@endcan
+
 @stop
 
 @section('css')
@@ -71,5 +81,7 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+<script> window.addEventListener('swal',function(e){
+    Swal.fire(e.detail);
+}); </script>
 @stop
