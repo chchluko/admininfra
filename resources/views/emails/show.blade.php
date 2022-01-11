@@ -14,7 +14,8 @@
         <!-- /.card-header -->
 
         <div class="card-body">
-            <div class="col-md-3 col-sm-6 col-12">
+            <div class="row">
+                <div class="col-md-6 col-sm-3 col-12">
                 <div class="info-box">
                   <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
 
@@ -26,6 +27,7 @@
                 </div>
                 <!-- /.info-box -->
               </div>
+            </div>
               <form method="POST" action="{{ route('trackingemails.store') }}">
                 @csrf
                     <!-- input states -->
@@ -40,9 +42,9 @@
                     <input type="hidden" name="tipo" value="GetPassword">
         </div>
         <!-- /.card-body -->
-        <div class="card-footer clearfix">
+        <div class="clearfix card-footer">
             <button type="submit" class="btn btn-info">Consultar</button>
-            <a type="link" href="{{ url()->previous() }}" class="btn btn-default float-right">Cancelar</a>
+            <a type="link" href="{{ url()->previous() }}" class="float-right btn btn-default">Cancelar</a>
         </div>
     </form>
       </div>

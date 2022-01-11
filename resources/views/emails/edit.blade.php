@@ -14,7 +14,8 @@
 
     <div class="card-body">
         @include('partials.alert')
-        <div class="col-md-3 col-sm-6 col-12">
+        <div class="row">
+            <div class="col-md-6 col-sm-3 col-12">
             <div class="info-box">
               <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
 
@@ -25,6 +26,7 @@
               <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
+          </div>
           </div>
           <form action="{{ route('emails.update',$email->id) }}" method="POST">
             @csrf
