@@ -18,8 +18,7 @@ class SwichController extends Controller
      */
     public function index()
     {
-        $resultado = Swich::paginate(15);
-        return view('plataformas.swich.index', compact('resultado'));
+        return view('plataformas.swich.index');
     }
 
     /**

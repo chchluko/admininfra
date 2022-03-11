@@ -15,7 +15,6 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            @livewire('platform.servers-index')
             @include('partials.flash')
             @if ($resultado->count() > 0)
             <table class="table">

@@ -1,3 +1,8 @@
 <div>
-    {{-- Nothing in the world is as soft and yielding as water. --}}
+    @include('partials.search')
+    @if ($search)
+        @include('plataformas.firewall.table')
+    @else
+        @include('plataformas.firewall.table')
+    @endif
 </div>

@@ -19,8 +19,7 @@ class RouterController extends Controller
      */
     public function index()
     {
-        $resultado = Router::paginate(15);
-        return view('plataformas.router.index', compact('resultado'));
+        return view('plataformas.router.index');
     }
 
     /**

@@ -15,12 +15,10 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            @livewire('platform.servers-index')
             @include('partials.flash')
             @if ($resultado->count() > 0)
             <table class="table">
                 <thead>
-                    <th>Tipo</th>
                     <th>IP</th>
                     <th>Marca</th>
                     <th>Datacenter</th>
@@ -31,7 +29,6 @@
                 <tbody>
             @foreach ($resultado as $hardware)
                         <tr>
-                            <td>{{ $hardware->tipoplataforma->tipo }}</td>
                             <td>{{ $hardware->ip }}</td>
                             <td>{{ $hardware->marca->marca }}</td>
                             <td>{{ $hardware->datacenter->name }}</td>

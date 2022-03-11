@@ -29,8 +29,7 @@ class ServerController extends Controller
      */
     public function index()
     {
-        $resultado = Server::whereBetween('vigsoporte', [Carbon::now(),Carbon::now()->addMonths(4) ])->where('status_id',1)->paginate(15);
-        return view('plataformas.server.index', compact('resultado'));
+        return view('plataformas.server.index');
     }
 
     /**

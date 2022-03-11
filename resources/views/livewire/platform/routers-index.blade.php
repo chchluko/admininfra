@@ -1,3 +1,8 @@
 <div>
-    {{-- The best athlete wants his opponent at his best. --}}
+    @include('partials.search')
+    @if ($search)
+        @include('plataformas.router.table')
+    @else
+        @include('plataformas.router.table')
+    @endif
 </div>

@@ -18,8 +18,7 @@ class FirewallController extends Controller
      */
     public function index()
     {
-        $resultado = Firewall::paginate(15);
-        return view('plataformas.firewall.index', compact('resultado'));
+     return view('plataformas.firewall.index');
     }
 
     /**
